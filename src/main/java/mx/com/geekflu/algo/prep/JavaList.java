@@ -1,11 +1,21 @@
 package mx.com.geekflu.algo.prep;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
 public class JavaList {
 
+	/* sample input
+5
+12 0 1 78 12
+2
+Insert
+5 23
+Delete
+0
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		List<Integer> l = new ArrayList<>();
@@ -33,6 +43,12 @@ public class JavaList {
         	System.out.print(in);
         	System.out.print(" ");
         }
+        
+        HashSet<String> hs = new HashSet<>();
+        hs.add("1 1");
+        System.out.println(hs.size());
+        hs.add("1 1");
+        System.out.println(hs.size());
 	}
 	
 }
