@@ -1,6 +1,7 @@
 package mx.com.geekflu.algo.prep;
 
 import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,6 +19,9 @@ public class Reflection {
 		for (String name : methodList) {
 			System.out.println(name);
 		}
+		
+		BigInteger bi = new BigInteger("4901971054862853523");
+		bi.isProbablePrime(1);
 	}
 
 }
