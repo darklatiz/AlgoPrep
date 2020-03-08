@@ -2,7 +2,8 @@ package mx.com.geekflu.algo.prep.data.structures;
 
 public class LinkedList<T> implements Listable<T>{
 	private Node<T> head;
-
+	private int size;
+	
 	@Override
 	public void insert(T data) {
 		Node<T> n =  new Node<>(data);
@@ -15,6 +16,7 @@ public class LinkedList<T> implements Listable<T>{
 			}
 			last.setNext(n);
 		}
+		size++;
 	}
 
 	@Override
@@ -29,7 +31,7 @@ public class LinkedList<T> implements Listable<T>{
 
 	@Override
 	public int size() {
-		return 0;
+		return size;
 	}
 	
 	public static void main(String[] args) {
@@ -62,6 +64,8 @@ public class LinkedList<T> implements Listable<T>{
 		list.insert("dinosaurios");
 		list.insert("dinosaurios");
 		list.print();
+		System.out.println();
+		System.out.println("List size: " + list.size());
 	}
 
 	@Override
