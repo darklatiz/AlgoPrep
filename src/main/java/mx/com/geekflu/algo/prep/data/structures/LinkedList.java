@@ -26,10 +26,25 @@ public class LinkedList<T> implements Listable<T> {
 
 	@Override
 	public boolean remove(T data) {
+		boolean deleted = false;
 		if (head != null) {
-
+			Node<T> current = head;
+			Node<T> prev = head;
+			while (current != null) {
+				if (current.getData().equals(data)) {
+					// link to next node
+					prev.setNext(current.getNext());
+					// remove current node
+					current.setNext(null);
+					current = null;
+					deleted = true;
+					break;
+				}
+				prev = current;
+				current = current.getNext();
+			}
 		}
-		return false;
+		return deleted;
 	}
 
 	@Override
@@ -46,26 +61,9 @@ public class LinkedList<T> implements Listable<T> {
 		list.insert("dinosaurios");
 		list.insert("dinosaurios");
 		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
-		list.insert("dinosaurios");
+		list.print();
+		list.remove("dinosaurios");
+		System.out.println("");
 		list.print();
 		System.out.println();
 		System.out.println("List size: " + list.size());
@@ -78,5 +76,10 @@ public class LinkedList<T> implements Listable<T> {
 			System.out.print(last.getData() + " ");
 			last = last.getNext();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "LinkedList [head=" + head + ", size=" + size + "]";
 	}
 }
