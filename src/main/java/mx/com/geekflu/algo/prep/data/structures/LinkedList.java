@@ -1,17 +1,17 @@
 package mx.com.geekflu.algo.prep.data.structures;
 
-public class LinkedList<T> implements Listable<T>{
+public class LinkedList<T> implements Listable<T> {
 	private Node<T> head;
 	private int size;
-	
+
 	@Override
 	public void insert(T data) {
-		Node<T> n =  new Node<>(data);
-		if(head == null) {
+		Node<T> n = new Node<>(data);
+		if (head == null) {
 			head = n;
-		}else {
+		} else {
 			Node<T> last = head;
-			while(last.getNext() != null) {
+			while (last.getNext() != null) {
 				last = last.getNext();
 			}
 			last.setNext(n);
@@ -26,6 +26,9 @@ public class LinkedList<T> implements Listable<T>{
 
 	@Override
 	public boolean remove(T data) {
+		if (head != null) {
+
+		}
 		return false;
 	}
 
@@ -33,7 +36,7 @@ public class LinkedList<T> implements Listable<T>{
 	public int size() {
 		return size;
 	}
-	
+
 	public static void main(String[] args) {
 		LinkedList<String> list = new LinkedList<>();
 		list.insert("gusanos");
@@ -71,7 +74,7 @@ public class LinkedList<T> implements Listable<T>{
 	@Override
 	public void print() {
 		Node<T> last = this.head;
-		while(last != null) {
+		while (last != null) {
 			System.out.print(last.getData() + " ");
 			last = last.getNext();
 		}
