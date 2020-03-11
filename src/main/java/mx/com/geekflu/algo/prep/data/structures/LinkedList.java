@@ -20,11 +20,6 @@ public class LinkedList<T> implements Listable<T> {
 	}
 
 	@Override
-	public T search(T data) {
-		return null;
-	}
-
-	@Override
 	public boolean remove(T data) {
 		boolean deleted = false;
 		if (head != null) {
@@ -32,12 +27,18 @@ public class LinkedList<T> implements Listable<T> {
 			Node<T> prev = head;
 			while (current != null) {
 				if (current.getData().equals(data)) {
-					// link to next node
-					prev.setNext(current.getNext());
-					// remove current node
-					current.setNext(null);
+					//We are on head and head has the data to be removed
+					if(current == prev) {
+						head = current.getNext();
+					}else {
+						// link to next node
+						prev.setNext(current.getNext());
+						// remove current node
+						current.setNext(null);
+					}
 					current = null;
 					deleted = true;
+					size--;
 					break;
 				}
 				prev = current;
@@ -53,7 +54,7 @@ public class LinkedList<T> implements Listable<T> {
 	}
 
 	public static void main(String[] args) {
-		LinkedList<String> list = new LinkedList<>();
+		Listable<String> list = new LinkedList<>();
 		list.insert("gusanos");
 		list.insert("anzuelo");
 		list.insert("hilo");
@@ -62,11 +63,25 @@ public class LinkedList<T> implements Listable<T> {
 		list.insert("dinosaurios");
 		list.insert("dinosaurios");
 		list.print();
-		list.remove("dinosaurios");
 		System.out.println("");
+		System.out.println("Reverse");
+		list.printReverse();
+		System.out.println("");
+		System.out.println("Was dinosaurios removed from list? " +list.remove("dinosaurios"));
+		System.out.println("Was dinosaurios removed from list? " +list.remove("dinosaurios"));
+		System.out.println("Was dinosaurios removed from list? " +list.remove("dinosaurios"));
+		System.out.println("Was dinosaurios removed from list? " +list.remove("dinosaurios"));
 		list.print();
 		System.out.println();
 		System.out.println("List size: " + list.size());
+		System.out.println("Was dinosaurios gusanos from list? " +list.remove("gusanos"));
+		list.print();
+		System.out.println("");
+		
+		System.out.println("Reverse");
+		list.printReverse();
+		
+		
 	}
 
 	@Override
@@ -82,4 +97,16 @@ public class LinkedList<T> implements Listable<T> {
 	public String toString() {
 		return "LinkedList [head=" + head + ", size=" + size + "]";
 	}
+
+	@Override
+	public void printReverse() {
+		printReverse(this.head);
+	}
+
+	private void printReverse(Node<T> node) {
+		if(node == null) return;
+		printReverse(node.getNext());
+		System.out.print(node.getData() + " ");
+	}
+
 }
