@@ -1,4 +1,4 @@
-package mx.com.geekflu.algo.prep.data.structures;
+package mx.com.geekflu.algo.prep.data.structures.stack;
 
 public interface Stackable<T> {
 	T pop();

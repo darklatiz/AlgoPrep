@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import mx.com.geekflu.algo.prep.data.structures.Stack;
+import mx.com.geekflu.algo.prep.data.structures.stack.Stack;
 
 /**
  * Unit test for simple App.
