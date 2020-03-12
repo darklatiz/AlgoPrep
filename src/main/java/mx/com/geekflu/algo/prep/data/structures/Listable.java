@@ -30,4 +30,10 @@ public interface Listable<T> {
 	 * Prints the list in reverse order
 	 */
 	void printReverse();
+	
+	/**
+	 * 
+	 * @return the head of the Linked list
+	 */
+	Node<T> head();
 }

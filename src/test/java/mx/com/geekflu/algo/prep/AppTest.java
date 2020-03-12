@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import mx.com.geekflu.algo.prep.data.structures.LinkedList;
 import mx.com.geekflu.algo.prep.data.structures.stack.Stack;
 
 /**
@@ -54,6 +55,31 @@ public class AppTest {
 		System.out.println();
 		assertEquals(0, stack.size());
 		assertTrue(stack.isEmpty());
+	}
+	
+	@Test
+	public void createLinkedList() {
+		LinkedList<Integer> ll = new LinkedList<>();
+		assertNotNull(ll);
+	}
+	
+	@Test
+	public void addDataToLinkedListAndCheckSize() {
+		LinkedList<Integer> ll = new LinkedList<>();
+		ll.insert(10);
+		ll.insert(10);
+		ll.insert(10);
+		ll.insert(10);
+		assertEquals(4, ll.size());
+		ll.remove(10);
+		assertEquals(3, ll.size());
+		ll.insert(1);
+		assertEquals(4, ll.size());
+		
+		ll.remove(1);
+		ll.remove(10);
+		ll.remove(10);
+		assertEquals(1, ll.size());
 	}
 	
 }
