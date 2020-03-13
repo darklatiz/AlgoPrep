@@ -109,10 +109,6 @@ public class LinkedList<T> implements Listable<T> {
 		System.out.print(node.getData() + " ");
 	}
 
-	public Node<T> getHead() {
-		return head;
-	}
-
 	@Override
 	public Node<T> head() {
 		return this.head;

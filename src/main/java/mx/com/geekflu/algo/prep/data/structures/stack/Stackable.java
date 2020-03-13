@@ -9,7 +9,7 @@ public interface Stackable<T> {
 	 * Prints the content of the stack following the next format
 	 * <b>A | B | C | D</b>
 	 */
-	void print();
+	String print(String delimiter);
 	
 	/**
 	 * Checks if the stack is empty

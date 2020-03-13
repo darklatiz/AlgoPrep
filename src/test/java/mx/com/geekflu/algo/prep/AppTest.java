@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import mx.com.geekflu.algo.prep.data.structures.LinkedList;
 import mx.com.geekflu.algo.prep.data.structures.stack.Stack;
+import mx.com.geekflu.algo.prep.data.structures.stack.StackLL;
 
 /**
  * Unit test for simple App.
@@ -23,7 +24,7 @@ public class AppTest {
 		stack.push("cruel");
 		stack.push("cruel");
 		stack.push("cruel01");
-		stack.print();
+		System.out.println(stack.print("<-"));
 		assertFalse(stack.isEmpty());
 		assertNotNull(stack.peek());
 		System.out.println("Peek: " + stack.peek());
@@ -80,6 +81,42 @@ public class AppTest {
 		ll.remove(10);
 		ll.remove(10);
 		assertEquals(1, ll.size());
+	}
+	
+	@Test
+	public void tesStackImplementationUsingLinkedList() {
+		StackLL<String> stack = new StackLL<>();
+		stack.push("hola");
+		stack.push("####");
+		stack.push("mundo");
+		stack.push("the");
+		stack.push("best");
+		assertEquals(5, stack.size());
+
+		stack.push("to");
+		stack.push("develop in java!");
+		
+		assertEquals(7, stack.size());
+		
+		System.out.println("Peeking: " + stack.peek());
+		assertEquals("develop in java!", stack.peek());
+		
+		String dato = stack.pop();
+		System.out.println("Poping: " + dato);
+		assertEquals("develop in java!", dato);
+		
+		System.out.println("Elements in stack: " + stack.print("<-"));
+		
+		//poping all the data
+		dato = null;
+		while((dato = stack.pop()) != null) {
+			System.out.print(dato);
+			System.out.print(" <- ");
+		}
+		System.out.println("");
+		System.out.println("Stack Size: " + stack.size());
+		System.out.println("Stack peek: " + stack.peek());
+		assertEquals(0, stack.size());
 	}
 	
 }

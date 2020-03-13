@@ -36,4 +36,6 @@ public interface Listable<T> {
 	 * @return the head of the Linked list
 	 */
 	Node<T> head();
+	
+	
 }

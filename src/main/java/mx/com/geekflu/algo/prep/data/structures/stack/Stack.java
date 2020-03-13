@@ -39,13 +39,15 @@ public class Stack<T> implements Stackable<T> {
 	}
 
 	@Override
-	public void print() {
+	public String print(String delimiter) {
 		StringBuilder sb = new StringBuilder();
 		for(int i = indexToInsert - 1 ; i >= 0 ; i--) {
+			sb.append(" ");
 			sb.append(data[i]);
-			sb.append(" -> ");
+			sb.append(" ");
+			sb.append(delimiter);
 		}
-		System.out.println(sb.toString());
+		return sb.toString();
 	}
 
 	@Override
