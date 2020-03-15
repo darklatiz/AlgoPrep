@@ -69,8 +69,17 @@ public class Queue<T> implements Queueable<T> {
 			e.printStackTrace();
 		}
 
+		System.out.println("PRINTING QUEUE: " + q.print("->"));
+
 		System.out.println("Removing an element from queue: " + q.poll());
 		System.out.println("Size: " + q.size());
+
+		System.out.println("Removing an element from queue: " + q.poll());
+		System.out.println("Size: " + q.size());
+
+		System.out.println("Removing an element from queue: " + q.poll());
+		System.out.println("Size: " + q.size());
+		System.out.println("PRINTING QUEUE: " + q.print("->"));
 
 		System.out.println("Removing an element from queue: " + q.poll());
 		System.out.println("Size: " + q.size());
@@ -86,6 +95,7 @@ public class Queue<T> implements Queueable<T> {
 
 		System.out.println("Removing an element from queue: " + q.poll());
 		System.out.println("Size: " + q.size());
+		System.out.println("PRINTING QUEUE: " + q.print("->"));
 
 		System.out.println("Removing an element from queue: " + q.poll());
 		System.out.println("Size: " + q.size());
@@ -95,12 +105,7 @@ public class Queue<T> implements Queueable<T> {
 
 		System.out.println("Removing an element from queue: " + q.poll());
 		System.out.println("Size: " + q.size());
-
-		System.out.println("Removing an element from queue: " + q.poll());
-		System.out.println("Size: " + q.size());
-
-		System.out.println("Removing an element from queue: " + q.poll());
-		System.out.println("Size: " + q.size());
+		System.out.println("PRINTING QUEUE: " + q.print("->"));
 
 		try {
 			q.add("es5");
@@ -109,19 +114,26 @@ public class Queue<T> implements Queueable<T> {
 			e.printStackTrace();
 		}
 
-		System.out.println(q.print("->"));
 	}
 
 	@Override
 	public String print(String delimiter) {
 		StringBuilder st = new StringBuilder();
-
-		return null;
+		for(int i = 0; i <= this.size - 1; i++) {
+			int step = i + this.top;
+			if(step >= this.data.length) {
+				step = 0;
+			}
+			st.append(" ");
+			st.append(this.data[step]);
+			st.append(" ");
+			st.append(delimiter);
+		}
+		return st.toString();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return this.size;
 	}
 

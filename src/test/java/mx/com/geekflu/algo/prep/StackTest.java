@@ -14,7 +14,7 @@ import mx.com.geekflu.algo.prep.data.structures.stack.StackLL;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class StackTest {
 
 	@Test
 	public void stackPushAndPeek() {
