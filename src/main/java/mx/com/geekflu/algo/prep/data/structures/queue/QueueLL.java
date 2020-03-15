@@ -12,6 +12,7 @@ import mx.com.geekflu.algo.prep.data.structures.Node;
 public class QueueLL<T> implements Queueable<T> {
 	
 	private Node<T> head;
+	private Node<T> tail;
 	private int size;
 
 	@Override
@@ -29,12 +30,10 @@ public class QueueLL<T> implements Queueable<T> {
 		Node<T> n = new Node<>(data);
 		if(this.head == null) {
 			this.head = n;
+			this.tail = n;
 		}else {
-			Node<T> temp = this.head;
-			while(temp.getNext() != null) {
-				temp = temp.getNext();
-			}
-			temp.setNext(n);
+			tail.setNext(n);
+			tail = n;
 		}
 		this.size++;
 		return true;
