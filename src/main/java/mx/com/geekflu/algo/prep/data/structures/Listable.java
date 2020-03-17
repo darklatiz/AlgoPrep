@@ -37,5 +37,14 @@ public interface Listable<T> {
 	 */
 	Node<T> head();
 	
+	/**
+	 * Merged two linked lists
+	 * @param list1
+	 * @param list2
+	 * @param isSorted this parameter is for saying if the lists are sorted
+	 * @return merged list
+	 */
+	Node<T> merge(Node<T> list1, Node<T> list2);
+	
 	
 }

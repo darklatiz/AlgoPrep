@@ -98,7 +98,6 @@ public class QueueLL<T> implements Queueable<T> {
 			
 			System.out.println("Queue Float numbers: " + floats.print("|"));
 		} catch (OperationNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,6 +1,6 @@
 package mx.com.geekflu.algo.prep.data.structures;
 
-public class LinkedList<T> implements Listable<T> {
+public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 	private Node<T> head;
 	private int size;
 
@@ -81,7 +81,21 @@ public class LinkedList<T> implements Listable<T> {
 		System.out.println("Reverse");
 		list.printReverse();
 		
+		Listable<Integer> list1 = new LinkedList<>();
+		Listable<Integer> list2 = new LinkedList<>();
+		list1.insert(-1);
+		list1.insert(2);
+		list1.insert(100);
+		list1.insert(-13);
 		
+		list2.insert(12);
+		list2.insert(-12);
+		list2.insert(121);
+		list2.insert(90);
+		list2.insert(8);
+		
+		Node<Integer> merged = list1.merge(list1.head(), list2.head());
+		System.out.println(merged);
 	}
 
 	@Override
@@ -112,6 +126,21 @@ public class LinkedList<T> implements Listable<T> {
 	@Override
 	public Node<T> head() {
 		return this.head;
+	}
+
+	@Override
+	public Node<T> merge(Node<T> list1, Node<T> list2) {
+		
+		if(list1 == null) return list2;
+		if(list2 == null) return list1;
+		
+		if(list1.getData().compareTo(list2.getData()) < 0) {
+			list1.setNext(merge(list1.getNext(), list2));
+			return list1;
+		}else {
+			list2.setNext(merge(list1, list2.getNext()));
+			return list2;
+		}
 	}
 	
 	
