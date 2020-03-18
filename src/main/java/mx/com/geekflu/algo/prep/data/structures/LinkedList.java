@@ -3,7 +3,14 @@ package mx.com.geekflu.algo.prep.data.structures;
 public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 	private Node<T> head;
 	private int size;
-
+	
+	public LinkedList() {
+	}
+	
+	public LinkedList(Node<T> head) {
+		this.head = head;
+	}
+	
 	@Override
 	public void insert(T data) {
 		Node<T> n = new Node<>(data);
@@ -83,19 +90,20 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 		
 		Listable<Integer> list1 = new LinkedList<>();
 		Listable<Integer> list2 = new LinkedList<>();
+		list1.insert(-13);
 		list1.insert(-1);
 		list1.insert(2);
 		list1.insert(100);
-		list1.insert(-13);
 		
-		list2.insert(12);
 		list2.insert(-12);
-		list2.insert(121);
-		list2.insert(90);
 		list2.insert(8);
+		list2.insert(12);
+		list2.insert(90);
+		list2.insert(121);
 		
-		Node<Integer> merged = list1.merge(list1.head(), list2.head());
-		System.out.println(merged);
+		Listable<Integer> merged = list1.merge(list1.head(), list2.head());
+		System.out.println("");
+		merged.print();
 	}
 
 	@Override
@@ -129,18 +137,31 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 	}
 
 	@Override
-	public Node<T> merge(Node<T> list1, Node<T> list2) {
+	public Listable<T> merge(Node<T> list1, Node<T> list2) {
+		Node<Integer> fake = new Node<>(100);
+		Node<T> last = (Node<T>) fake;
 		
-		if(list1 == null) return list2;
-		if(list2 == null) return list1;
-		
-		if(list1.getData().compareTo(list2.getData()) < 0) {
-			list1.setNext(merge(list1.getNext(), list2));
-			return list1;
-		}else {
-			list2.setNext(merge(list1, list2.getNext()));
-			return list2;
+		while(list1 != null && list2 != null) {
+			if(list1.getData().compareTo(list2.getData()) < 0) {
+				last.setNext(list1);
+				last = list1;
+				list1 = list1.getNext();
+			}else {
+				last.setNext(list2);
+				last = list2;
+				list2 = list2.getNext();
+			}
 		}
+		
+		if(list1 != null) {
+			last.setNext(list1);
+		}
+		if(list2 != null) {
+			last.setNext(list2);
+		}
+		Listable<T> nl = new LinkedList<>((Node<T>) fake.getNext());
+		
+		return nl;
 	}
 	
 	

@@ -44,7 +44,7 @@ public interface Listable<T> {
 	 * @param isSorted this parameter is for saying if the lists are sorted
 	 * @return merged list
 	 */
-	Node<T> merge(Node<T> list1, Node<T> list2);
+	Listable<T> merge(Node<T> list1, Node<T> list2);
 	
 	
 }
