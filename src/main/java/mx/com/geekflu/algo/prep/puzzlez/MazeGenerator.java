@@ -39,6 +39,8 @@ public class MazeGenerator {
 			{1,0,0,0,0,0,0,1,0},
 			{1,1,1,1,1,1,1,1,1},
 	};
+	
+	int[] numbers = {1,2,3,4,5,6,7,8,9,10};
 
 	public static void main(String[] args) {
 		for(int i = 0 ; i < maze.length ; i++) {
@@ -51,5 +53,28 @@ public class MazeGenerator {
 			}
 			System.out.println("");
 		}
+		MazeGenerator m = new MazeGenerator();
+		System.out.println(m.method(m.numbers, 0, 9));
+		m.test(100);
     }
+	
+	
+	public int method(int[] arr, int left, int right) {
+		System.out.println("Left: "+ left);
+		System.out.println("Right: "+ right);
+		if( left == right) {
+			return arr[left] % 2 == 0 ? 1:0;
+		}else {		
+			int mid = (left + right) / 2;
+			return method(arr, left, mid) + method(arr, mid +1, right);
+		}
+	}
+	
+	public void test(int n) {
+		if(n > 0) {
+			System.out.println(n);
+			test(n-1);
+		}
+	}
+	
 }
