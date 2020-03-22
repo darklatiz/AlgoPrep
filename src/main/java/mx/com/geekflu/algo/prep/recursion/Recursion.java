@@ -34,9 +34,10 @@ public class Recursion {
 	
 	public static void main(String[] args) {
 		Recursion r =new Recursion();
-		for(int i = 1; i < 50; i++ ) {
+		for(int i = 1; i < 350; i++ ) {
 			System.out.println("Fibnonacci(" + i + "):  "+ r.fibonacci(i));
-//			System.out.println(r.fibonacci(i+1).divide(r.fibonacci(i)));
+			System.out.println("Golden Ratio: " + r.fibonacci(i+1).doubleValue() / r.fibonacci(i).doubleValue());
+			System.out.println("");
 		}
 	}
 
