@@ -31,14 +31,27 @@ public class Recursion {
 		return value;
 	}
 	
+	public double pow(long base, long exp) {
+		if(exp == 0) {
+			return 1;
+		}
+		if(exp % 2 == 0) {
+			return pow(base, exp/2) * pow(base, exp/2);
+		}else {
+			return base * pow(base, exp/2) * pow(base, exp/2);
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		Recursion r =new Recursion();
-		for(int i = 1; i < 350; i++ ) {
+		for(int i = 1; i < 50; i++ ) {
 			System.out.println("Fibnonacci(" + i + "):  "+ r.fibonacci(i));
 			System.out.println("Golden Ratio: " + r.fibonacci(i+1).doubleValue() / r.fibonacci(i).doubleValue());
 			System.out.println("");
 		}
+		
+		System.out.println("QUE: " + r.pow(2, 5));
 	}
 
 }
