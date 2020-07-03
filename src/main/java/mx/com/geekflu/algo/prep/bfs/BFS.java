@@ -35,7 +35,55 @@ public class BFS<T> {
     return 0;
   }
 
+  public int numOfIslands(char[][] grid){
+    if(grid == null || grid.length <= 0){
+      return 0;
+    }
+    int numIslands = 0;
+    for(int row = 0; row < grid.length; row++){
+      for(int col = 0; col < grid[row].length; col++){
+        if(grid[row][col] == '1'){
+          numIslands++;
+          dfs(grid, row, col);
+        }
+      }
+    }
+    return numIslands;
+  }
 
+  void bfs(char[][] grid, int row, int col){
+
+    return;
+  }
+
+  void dfs(char[][] grid, int row, int col) {
+    int nr = grid.length;
+    int nc = grid[0].length;
+
+    if (row < 0 || col < 0 || row >= nr || col >= nc || grid[row][col] == '0') {
+      return;
+    }
+
+    grid[row][col] = '0';
+    dfs(grid, row - 1, col);
+    dfs(grid, row + 1, col);
+    dfs(grid, row, col - 1);
+    dfs(grid, row, col + 1);
+  }
+
+  public static void main(String[] args) {
+
+    char[][] characters = {
+      {'1', '1', '0', '0', '0'},
+      {'1', '1', '0', '0', '0'},
+      {'0', '0', '1', '0', '0'},
+      {'0', '0', '0', '1', '1'},
+      {'1', '1', '0', '0', '0'}
+    };
+
+    BFS<Character> bfs = new BFS<>();
+
+  }
 
 
 }
