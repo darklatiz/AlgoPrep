@@ -1,5 +1,7 @@
 package mx.com.geekflu.algo.prep.data.arrays;
 
+import java.util.Arrays;
+
 public class Problems {
 
   public int findMaxConsecutiveOnes(int[] nums) {
@@ -29,10 +31,24 @@ public class Problems {
     return counter;
   }
 
+  public int[] sortedSquares(int[] A) {
+    for (int i = 0; i < A.length; i++){
+      A[i] = A[i] * A[i];
+    }
+    Arrays.sort(A);
+    return A;
+  }
+
   public static void main(String[] args) {
     Problems p = new Problems();
     p.executeFindMaxConsecutiveOnes();
     p.executeFindNumbers();
+    p.executeSortedSquares();
+  }
+
+  private void executeSortedSquares() {
+    int[] B = {-4,-1,0,3,10};
+    System.out.println(sortedSquares(B));
   }
 
   private void executeFindNumbers() {
