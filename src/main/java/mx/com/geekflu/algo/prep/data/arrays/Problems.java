@@ -19,9 +19,25 @@ public class Problems {
     return maxCounter;
   }
 
+  public int findNumbers(int[] nums) {
+    int counter = 0;
+    for(int i = 0; i < nums.length; i++){
+      if(nums[i] >= 10 && nums[i] < 100) counter++;
+      else if (nums[i] >= 1000 && nums[i] < 10000) counter++;
+      else if (nums[i] == 100000) counter++;
+    }
+    return counter;
+  }
+
   public static void main(String[] args) {
     Problems p = new Problems();
     p.executeFindMaxConsecutiveOnes();
+    p.executeFindNumbers();
+  }
+
+  private void executeFindNumbers() {
+    int[] nums = {12,345,2,6,7896};
+    System.out.println("executeFindNumbers: " + findNumbers(nums));
   }
 
   private void executeFindMaxConsecutiveOnes() {
