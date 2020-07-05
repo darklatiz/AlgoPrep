@@ -1,7 +1,6 @@
 package mx.com.geekflu.algo.prep.data.arrays;
 
 import java.util.Arrays;
-import java.util.Collection;
 
 public class Problems {
 
@@ -84,6 +83,36 @@ public class Problems {
     p.executeFindNumbers();
     p.executeSortedSquares();
     p.executeDuplicateZeros();
+    p.executeMergeSortedArrays();
+  }
+
+  private void executeMergeSortedArrays() {
+    int[] A = {-1,0,0,0,3,0,0,0,0,0,0}; // m = 3
+    int[] B = {-1,-1,0,0,1,2};       // n = 3
+    int[] A1 = {-1,-1,0,0,0,0}; // m = 3
+    int[] B1 = {-1, 0};       // n = 3
+    System.out.println("executeMergeSortedArrays...");
+    merge(A1, A1.length, B1, B1.length);
+    merge(A, A.length, B, B.length);
+    System.out.println(Arrays.toString(A1));
+    System.out.println(Arrays.toString(A));
+
+  }
+
+  public void merge(int[] nums1, int m, int[] nums2, int n) {
+    for(int i = 0, j = 0; i < nums1.length; i++){
+      if(j < n && nums2[j] <= nums1[i]){
+        for(int k = nums1.length - 1; k > i; k--){
+          nums1[k] = nums1[k - 1];
+        }
+        nums1[i] = nums2[j];
+        j++;
+      }else {
+        if(nums1[i] == 0 && i >= m && j < n) {
+          nums1[i] = nums2[j++];
+        }
+      }
+    }
   }
 
   private int[] duplicateZeros(int[] B) {
@@ -126,6 +155,8 @@ public class Problems {
   }
 
   private void executeSortedSquares() {
+    System.out.println("executeSortedSquares............");
+
     int[] B = {-4, -1, 0, 3, 10};
     int[] B1 = {-234,-123, -100, -33, -11, -4, -1, 1, 3, 10};
     int[] B2 = {-1};
