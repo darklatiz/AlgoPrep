@@ -2,7 +2,7 @@ package mx.com.geekflu.algo.prep.data.arrays;
 
 import java.util.Arrays;
 
-public class Problems {
+public class Arrays101 {
 
   public int findMaxConsecutiveOnes(int[] nums) {
     if (nums == null || nums.length <= 0) return 0;
@@ -78,7 +78,7 @@ public class Problems {
   }
 
   public static void main(String[] args) {
-    Problems p = new Problems();
+    Arrays101 p = new Arrays101();
     p.executeFindMaxConsecutiveOnes();
     p.executeFindNumbers();
     p.executeSortedSquares();
