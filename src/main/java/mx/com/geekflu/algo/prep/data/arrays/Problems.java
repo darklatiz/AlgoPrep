@@ -83,6 +83,46 @@ public class Problems {
     p.executeFindMaxConsecutiveOnes();
     p.executeFindNumbers();
     p.executeSortedSquares();
+    p.executeDuplicateZeros();
+  }
+
+  private int[] duplicateZeros(int[] B) {
+    for (int j = 0; j < B.length; j++){
+      if(B[j] == 0 && (j + 1) < B.length){
+        shift2Right(B, j + 1, 1);
+        j = j + 1;
+      }
+    }
+    return B;
+  }
+
+  private void shift2Right(int[] A, int fromIdx, int steps){
+    while (steps > 0) {
+      for (int i = A.length - 1; i > fromIdx; i--) {
+        A[i] = A[i - 1];
+      }
+      steps--;
+      A[fromIdx] = 0;
+    }
+  }
+
+  private void executeDuplicateZeros() {
+    System.out.println("executeDuplicateZeros............");
+    int[] A = {1,0,0,2,3,0,4,5,0};
+    int[] B = {1};
+    int[] C = {0};
+    int[] D = {0,0};
+    int[] E = {0,1};
+    int[] F = {1,0};
+    int[] G = {1,1};
+    System.out.println(Arrays.toString(duplicateZeros(A)));
+    System.out.println(Arrays.toString(duplicateZeros(B)));
+    System.out.println(Arrays.toString(duplicateZeros(C)));
+    System.out.println(Arrays.toString(duplicateZeros(D)));
+    System.out.println(Arrays.toString(duplicateZeros(E)));
+    System.out.println(Arrays.toString(duplicateZeros(F)));
+    System.out.println(Arrays.toString(duplicateZeros(G)));
+
   }
 
   private void executeSortedSquares() {
