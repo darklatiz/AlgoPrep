@@ -77,6 +77,49 @@ public class Arrays101 {
     return B;
   }
 
+  public int removeElement(int[] nums, int val) {
+    int counter = 0;
+    int endIdx = nums.length - 1;
+    for (int zebra = 0; zebra < nums.length; zebra++){
+      if(nums[zebra] == val){
+        int swap = nums[endIdx];
+        nums[endIdx] = nums[zebra];
+        nums[zebra] = swap;
+        endIdx--;
+        counter++;
+      }
+    }
+    return counter;
+  }
+
+  public int removeElementLeet(int[] nums, int val){
+    int i = 0;
+    int n = nums.length;
+    while (i < n) {
+      if (nums[i] == val) {
+        nums[i] = nums[n - 1];
+        // reduce array size by one
+        n--;
+      } else {
+        i++;
+      }
+    }
+    return n;
+  }
+
+  public int removeDuplicates(int[] nums) {
+    if (nums == null || nums.length == 0) return 0;
+    int i = 0;
+    for (int j = 1; j < nums.length; j++) {
+      if (nums[j] != nums[i]) {
+        i++;
+        nums[i] = nums[j];
+      }
+      System.out.println(Arrays.toString(nums));
+    }
+    return i + 1;
+  }
+
   public static void main(String[] args) {
     Arrays101 p = new Arrays101();
     p.executeFindMaxConsecutiveOnes();
@@ -84,6 +127,29 @@ public class Arrays101 {
     p.executeSortedSquares();
     p.executeDuplicateZeros();
     p.executeMergeSortedArrays();
+    p.executeRemoveElement();
+    p.executeRemoveElementSorted();
+  }
+
+  private void executeRemoveElementSorted() {
+    int[] A = {3,3,3,3,3,3,3,3,34};
+    System.out.println("executeRemoveElementSorted...");
+    removeDuplicates(A);
+    System.out.printf("for Array: %s", Arrays.toString(A));
+  }
+
+  private void executeRemoveElement() {
+    int[] A = {0,1,2,2,3,0,4,2};
+    int[] AA = {0,1,2,2,3,0,4,2};
+    int[] B = {-1,0,0,0,3,0,0,0,0,0,3};
+    System.out.println("executeRemoveElement...");
+    int deletedCounted = removeElement(A, 2);
+    int deletedCountedA = removeElementLeet(AA, 2);
+    System.out.printf("Value %d was deleted %d for Array: %s", 2, deletedCounted, Arrays.toString(A));
+    System.out.printf("\nValue %d was deleted %d for Array: %s", 2, deletedCountedA, Arrays.toString(AA));
+
+    deletedCounted = removeElement(B, 3);
+    System.out.printf("\nValue %d was deleted %d for Array: %s", 3, deletedCounted, Arrays.toString(B));
   }
 
   private void executeMergeSortedArrays() {

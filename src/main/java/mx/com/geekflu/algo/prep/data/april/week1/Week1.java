@@ -1,8 +1,30 @@
 package mx.com.geekflu.algo.prep.data.april.week1;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Week1 {
+
+
+  public boolean isHappy(int n) {
+    Map<Integer, Integer> seen = new HashMap<>();
+    int number = 0;
+    while (n > 1 && !seen.containsKey(n)){
+      seen.put(n, n);
+      n = pdi(n, 10);
+    }
+    return n == 1;
+  }
+
+  private int pdi(int number, int base) {
+    int total  = 0;
+    while(number > 0){
+      total = (int) (total + Math.pow(number % base, 2));
+      number = (int) Math.floor(number / base);
+    }
+    return total;
+  }
 
   public int singleNumber(int[] nums) {
     if(nums == null || nums.length == 0) return Integer.MIN_VALUE;
@@ -50,5 +72,13 @@ public class Week1 {
   public static void main(String[] args) {
     Week1 w = new Week1();
     w.executeSingleNumber();
+    w.executeHappyNumber();
+  }
+
+  private void executeHappyNumber() {
+
+   System.out.println("executeHappyNumber......");
+   System.out.println(isHappy(19));
+
   }
 }
