@@ -250,10 +250,27 @@ public class Arrays101 {
     return max;
   }
 
+  public int[] replaceElementsFast(int[] arr) {
+
+    replace(arr, arr.length-1, -1);
+    return arr;
+  }
+
+  private void replace(int[] arr, int ind, int val)
+  {
+    int temp = arr[ind];
+    arr[ind] = val;
+    if(ind == 0)
+      return;
+    replace(arr, --ind, Math.max(val, temp));
+  }
+
   private void executeReplaceElements(){
     int[] A = {17,18,5,4,6,1};
+    int[] B = {17,18,5,4,6,1};
     System.out.println("eexecuteReplaceElements...........");
     System.out.println(Arrays.toString(replaceElements(A)));
+    System.out.println(Arrays.toString(replaceElementsFast(B)));
   }
 
   private void executeValidMountain() {
