@@ -135,12 +135,54 @@ public class Arrays101 {
         ++right;
       }
     }
-
   }
 
-  private void executeMoveZeroes(){
-    int[] A = {0,12,1,2,0,2,0,2,0};
-    int[] B = {0,0,1};
+  public static void main(String[] args) {
+    Arrays101 p = new Arrays101();
+    p.executeFindMaxConsecutiveOnes();
+    p.executeFindNumbers();
+    p.executeSortedSquares();
+    p.executeDuplicateZeros();
+    p.executeMergeSortedArrays();
+    p.executeRemoveElement();
+    p.executeRemoveElementSorted();
+    p.executeIfExists();
+    p.executeValidMountain();
+    p.executeReplaceElements();
+    p.executeMoveZeroes();
+    p.executeSortArrayByParity();
+  }
+
+  public int[] sortArrayByParity(int[] A) {
+    if (A == null || A.length == 0 || A.length == 1) return A;
+
+    int left = 0, right = 0;
+    int temp;
+
+    while (right < A.length) {
+      if (A[right] % 2 == 1) {
+        right++;
+      } else {
+        //lets swap
+        temp = A[left];
+        A[left] = A[right];
+        A[right] = temp;
+        left++;
+        right++;
+      }
+    }
+    return A;
+  }
+
+  private void swap(int[] arr, int left, int right) {
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+  }
+
+  private void executeMoveZeroes() {
+    int[] A = {0, 12, 1, 2, 0, 2, 0, 2, 0};
+    int[] B = {0, 0, 1};
     System.out.println("executeMoveZeroes....");
     moveZeroes(B);
     System.out.println(Arrays.toString(B));
@@ -358,19 +400,12 @@ public class Arrays101 {
     System.out.println(checkIfExist(nums));
   }
 
-  public static void main(String[] args) {
-    Arrays101 p = new Arrays101();
-    p.executeFindMaxConsecutiveOnes();
-    p.executeFindNumbers();
-    p.executeSortedSquares();
-    p.executeDuplicateZeros();
-    p.executeMergeSortedArrays();
-    p.executeRemoveElement();
-    p.executeRemoveElementSorted();
-    p.executeIfExists();
-    p.executeValidMountain();
-    p.executeReplaceElements();
-    p.executeMoveZeroes();
+  private void executeSortArrayByParity() {
+    System.out.println("executeSortArrayByParity....");
+    int[] A = {3, 1, 2, 4};
+    int[] B = {1, 1, 1, 0, 2, 1, 2, 0};
+    System.out.println(Arrays.toString(sortArrayByParity(A)));
+    System.out.println(Arrays.toString(sortArrayByParity(B)));
   }
 
 
