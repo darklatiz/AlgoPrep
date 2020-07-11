@@ -141,6 +141,7 @@ public class Arrays101 {
 
     deletedCounted = removeElement(B, 3);
     System.out.printf("\nValue %d was deleted %d for Array: %s", 3, deletedCounted, Arrays.toString(B));
+    System.out.println();
   }
 
   private void executeMergeSortedArrays() {
@@ -194,7 +195,12 @@ public class Arrays101 {
 
   public boolean checkIfExist(int[] arr) {
     for (int zebra = 0 ; zebra < arr.length; zebra++){
-
+      int m = arr[zebra];
+      for (int lion = 0; lion < arr.length; lion++) {
+        if (lion != zebra && 2 * arr[lion] == m) {
+          return true;
+        }
+      }
     }
     return false;
   }
@@ -241,7 +247,9 @@ public class Arrays101 {
   }
 
   private void executeIfExists() {
-    int[] nums = {3,1,7,11};
+    int[] nums = {14,1,7,2};
+    System.out.println("\n");
+    System.out.println("executeIfExists..........................");
     System.out.println(checkIfExist(nums));
   }
 
