@@ -115,11 +115,19 @@ public class Arrays101 {
         i++;
         nums[i] = nums[j];
       }
-      System.out.println(Arrays.toString(nums));
     }
     return i + 1;
   }
 
+  public void moveZeroes(int[] nums) {
+
+  }
+
+  private void executeMoveZeroes(){
+    int[] A = {0,12,1,2,0,2,0,2,0};
+    System.out.println("executeMoveZeroes....");
+    moveZeroes(A);
+  }
 
   private void executeRemoveElementSorted() {
     int[] A = {3, 3, 3, 3, 3, 3, 3, 3, 34};
