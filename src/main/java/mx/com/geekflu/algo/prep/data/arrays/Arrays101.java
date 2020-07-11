@@ -120,17 +120,22 @@ public class Arrays101 {
   }
 
   public void moveZeroes(int[] nums) {
-    for(int readPointer = 0; readPointer < nums.length; readPointer++ ){
-      if (nums[readPointer] == 0){
-        for (int writePtr = readPointer; writePtr < nums.length; writePtr++){
-          if(writePtr != nums.length - 1) {
-            nums[writePtr] = nums[writePtr + 1];
-          }else{
-            nums[nums.length -1] = 0;
-          }
-        }
+    if (nums == null || nums.length == 0 || nums.length == 1) return;
+
+    int right = 0, left = 0;
+    int temp;
+    while (right < nums.length) {
+      if (nums[right] == 0) {
+        ++right;
+      } else {
+        temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+        ++left;
+        ++right;
       }
     }
+
   }
 
   private void executeMoveZeroes(){
