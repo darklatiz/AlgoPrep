@@ -55,21 +55,21 @@ public class Arrays101 {
     while (negIdx >= 0 && posIdx < A.length) {
       int negSquare = A[negIdx] * A[negIdx];
       int posSquare = A[posIdx] * A[posIdx];
-      if(negSquare < posSquare){
+      if (negSquare < posSquare) {
         B[Bidx++] = negSquare;
         negIdx--;
-      }else{
+      } else {
         B[Bidx++] = posSquare;
         posIdx++;
       }
     }
 
-    while (A.length >= 1 && negIdx >= 0){
+    while (A.length >= 1 && negIdx >= 0) {
       B[Bidx++] = A[negIdx] * A[negIdx];
       negIdx--;
     }
 
-    while(A.length >= 1 && posIdx < A.length){
+    while (A.length >= 1 && posIdx < A.length) {
       B[Bidx++] = A[posIdx] * A[posIdx];
       posIdx++;
     }
@@ -80,8 +80,8 @@ public class Arrays101 {
   public int removeElement(int[] nums, int val) {
     int counter = 0;
     int endIdx = nums.length - 1;
-    for (int zebra = 0; zebra < nums.length; zebra++){
-      if(nums[zebra] == val){
+    for (int zebra = 0; zebra < nums.length; zebra++) {
+      if (nums[zebra] == val) {
         int swap = nums[endIdx];
         nums[endIdx] = nums[zebra];
         nums[zebra] = swap;
@@ -92,7 +92,7 @@ public class Arrays101 {
     return counter;
   }
 
-  public int removeElementLeet(int[] nums, int val){
+  public int removeElementLeet(int[] nums, int val) {
     int i = 0;
     int n = nums.length;
     while (i < n) {
@@ -121,18 +121,17 @@ public class Arrays101 {
   }
 
 
-
   private void executeRemoveElementSorted() {
-    int[] A = {3,3,3,3,3,3,3,3,34};
+    int[] A = {3, 3, 3, 3, 3, 3, 3, 3, 34};
     System.out.println("executeRemoveElementSorted...");
     removeDuplicates(A);
     System.out.printf("for Array: %s", Arrays.toString(A));
   }
 
   private void executeRemoveElement() {
-    int[] A = {0,1,2,2,3,0,4,2};
-    int[] AA = {0,1,2,2,3,0,4,2};
-    int[] B = {-1,0,0,0,3,0,0,0,0,0,3};
+    int[] A = {0, 1, 2, 2, 3, 0, 4, 2};
+    int[] AA = {0, 1, 2, 2, 3, 0, 4, 2};
+    int[] B = {-1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3};
     System.out.println("executeRemoveElement...");
     int deletedCounted = removeElement(A, 2);
     int deletedCountedA = removeElementLeet(AA, 2);
@@ -145,9 +144,9 @@ public class Arrays101 {
   }
 
   private void executeMergeSortedArrays() {
-    int[] A = {-1,0,0,0,3,0,0,0,0,0,0}; // m = 3
-    int[] B = {-1,-1,0,0,1,2};       // n = 3
-    int[] A1 = {-1,-1,0,0,0,0}; // m = 3
+    int[] A = {-1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0}; // m = 3
+    int[] B = {-1, -1, 0, 0, 1, 2};       // n = 3
+    int[] A1 = {-1, -1, 0, 0, 0, 0}; // m = 3
     int[] B1 = {-1, 0};       // n = 3
     System.out.println("executeMergeSortedArrays...");
     merge(A1, A1.length, B1, B1.length);
@@ -158,15 +157,15 @@ public class Arrays101 {
   }
 
   public void merge(int[] nums1, int m, int[] nums2, int n) {
-    for(int i = 0, j = 0; i < nums1.length; i++){
-      if(j < n && nums2[j] <= nums1[i]){
-        for(int k = nums1.length - 1; k > i; k--){
+    for (int i = 0, j = 0; i < nums1.length; i++) {
+      if (j < n && nums2[j] <= nums1[i]) {
+        for (int k = nums1.length - 1; k > i; k--) {
           nums1[k] = nums1[k - 1];
         }
         nums1[i] = nums2[j];
         j++;
-      }else {
-        if(nums1[i] == 0 && i >= m && j < n) {
+      } else {
+        if (nums1[i] == 0 && i >= m && j < n) {
           nums1[i] = nums2[j++];
         }
       }
@@ -174,8 +173,8 @@ public class Arrays101 {
   }
 
   private int[] duplicateZeros(int[] B) {
-    for (int j = 0; j < B.length; j++){
-      if(B[j] == 0 && (j + 1) < B.length){
+    for (int j = 0; j < B.length; j++) {
+      if (B[j] == 0 && (j + 1) < B.length) {
         shift2Right(B, j + 1, 1);
         j = j + 1;
       }
@@ -183,7 +182,7 @@ public class Arrays101 {
     return B;
   }
 
-  private void shift2Right(int[] A, int fromIdx, int steps){
+  private void shift2Right(int[] A, int fromIdx, int steps) {
     while (steps > 0) {
       for (int i = A.length - 1; i > fromIdx; i--) {
         A[i] = A[i - 1];
@@ -194,7 +193,7 @@ public class Arrays101 {
   }
 
   public boolean checkIfExist(int[] arr) {
-    for (int zebra = 0 ; zebra < arr.length; zebra++){
+    for (int zebra = 0; zebra < arr.length; zebra++) {
       int m = arr[zebra];
       for (int lion = 0; lion < arr.length; lion++) {
         if (lion != zebra && 2 * arr[lion] == m) {
@@ -206,24 +205,28 @@ public class Arrays101 {
   }
 
   public boolean validMountainArray(int[] A) {
+    if (A == null || A.length < 3) {
+      return false;
+    }
     boolean increasing = false;
     boolean decreasing = false;
     int peak = 0;
-    for (int i = 0; i < A.length - 1 ; i++){
-      if(A[i] < A[i + 1]){
+    for (int i = 0; i < A.length - 1; i++) {
+      if (A[i] < A[i + 1]) {
         peak = i + 1;
-      }else{
+      } else {
         break;
       }
     }
-    if(peak > 0){
+    if (peak > 0) {
       increasing = true;
     }
-    for (int i = peak; i < A.length -1 ; i++ ){
-      if(A[i] > A[i + 1]){
+    for (int i = peak; i < A.length - 1; i++) {
+      if (A[i] > A[i + 1]) {
         decreasing = true;
-      }else {
+      } else {
         decreasing = false;
+        break;
       }
     }
     return increasing && decreasing;
@@ -231,9 +234,11 @@ public class Arrays101 {
 
   private void executeValidMountain() {
     System.out.println("executeValidMountain...........");
-    int[] A = {0,1,2,3,4,5,678,677,500,300,2,1,0};
-    int[] B = {2,1};//false
-    int[] C = {3,5,5};//false
+    int[] D = {3, 7, 6, 4, 3, 0, 1, 0};//false
+    int[] A = {0, 1, 2, 3, 4, 5, 678, 677, 500, 300, 2, 1, 0};//true
+    int[] B = {2, 1};//false
+    int[] C = {3, 5, 5};//false
+    System.out.println(validMountainArray(D));
     System.out.println(validMountainArray(A));
     System.out.println(validMountainArray(B));
     System.out.println(validMountainArray(C));
@@ -241,13 +246,13 @@ public class Arrays101 {
 
   private void executeDuplicateZeros() {
     System.out.println("executeDuplicateZeros............");
-    int[] A = {1,0,0,2,3,0,4,5,0};
+    int[] A = {1, 0, 0, 2, 3, 0, 4, 5, 0};
     int[] B = {1};
     int[] C = {0};
-    int[] D = {0,0};
-    int[] E = {0,1};
-    int[] F = {1,0};
-    int[] G = {1,1};
+    int[] D = {0, 0};
+    int[] E = {0, 1};
+    int[] F = {1, 0};
+    int[] G = {1, 1};
     System.out.println(Arrays.toString(duplicateZeros(A)));
     System.out.println(Arrays.toString(duplicateZeros(B)));
     System.out.println(Arrays.toString(duplicateZeros(C)));
@@ -262,7 +267,7 @@ public class Arrays101 {
     System.out.println("executeSortedSquares............");
 
     int[] B = {-4, -1, 0, 3, 10};
-    int[] B1 = {-234,-123, -100, -33, -11, -4, -1, 1, 3, 10};
+    int[] B1 = {-234, -123, -100, -33, -11, -4, -1, 1, 3, 10};
     int[] B2 = {-1};
     System.out.println(Arrays.toString(sortedSquares(B)));
     System.out.println(Arrays.toString(sortedSquaresAlternateSolution(B1)));
@@ -281,7 +286,7 @@ public class Arrays101 {
   }
 
   private void executeIfExists() {
-    int[] nums = {14,1,7,2};
+    int[] nums = {14, 1, 7, 2};
     System.out.println("\n");
     System.out.println("executeIfExists..........................");
     System.out.println(checkIfExist(nums));
@@ -299,7 +304,6 @@ public class Arrays101 {
     p.executeIfExists();
     p.executeValidMountain();
   }
-
 
 
 }
