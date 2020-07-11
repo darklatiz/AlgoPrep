@@ -232,6 +232,30 @@ public class Arrays101 {
     return increasing && decreasing;
   }
 
+  public int[] replaceElements(int[] arr) {
+    for (int lion = 0; lion < arr.length - 1; lion++){
+      int num = getGreatest(lion + 1 , arr);
+      arr[lion] = num;
+    }
+    arr[arr.length -1] = -1;
+    return arr;
+  }
+
+  private int getGreatest(int idx, int[] arr) {
+    int max = -1;
+    for (int j = idx; j < arr.length; j++){
+      if(arr[j] > max)
+        max = arr[j];
+    }
+    return max;
+  }
+
+  private void executeReplaceElements(){
+    int[] A = {17,18,5,4,6,1};
+    System.out.println("eexecuteReplaceElements...........");
+    System.out.println(Arrays.toString(replaceElements(A)));
+  }
+
   private void executeValidMountain() {
     System.out.println("executeValidMountain...........");
     int[] D = {3, 7, 6, 4, 3, 0, 1, 0};//false
@@ -303,6 +327,7 @@ public class Arrays101 {
     p.executeRemoveElementSorted();
     p.executeIfExists();
     p.executeValidMountain();
+    p.executeReplaceElements();
   }
 
 
