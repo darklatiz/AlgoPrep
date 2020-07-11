@@ -205,6 +205,21 @@ public class Arrays101 {
     return false;
   }
 
+  public boolean validMountainArray(int[] A) {
+    for (int i = 0; i < A.length ; i++){
+      if(A[i] < A[i + 1]){
+        continue;
+      }else if()
+    }
+    return false;
+  }
+
+  private void executeValidMountain() {
+    System.out.println("executeValidMountain...........");
+    int[] A = {0,1,2,3,4,5,678,677,500,300,2,1,0};
+    System.out.println(validMountainArray(A));
+  }
+
   private void executeDuplicateZeros() {
     System.out.println("executeDuplicateZeros............");
     int[] A = {1,0,0,2,3,0,4,5,0};
@@ -263,6 +278,9 @@ public class Arrays101 {
     p.executeRemoveElement();
     p.executeRemoveElementSorted();
     p.executeIfExists();
+    p.executeValidMountain();
   }
+
+
 
 }
