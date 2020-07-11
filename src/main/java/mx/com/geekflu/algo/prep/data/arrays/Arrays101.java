@@ -120,16 +120,7 @@ public class Arrays101 {
     return i + 1;
   }
 
-  public static void main(String[] args) {
-    Arrays101 p = new Arrays101();
-    p.executeFindMaxConsecutiveOnes();
-    p.executeFindNumbers();
-    p.executeSortedSquares();
-    p.executeDuplicateZeros();
-    p.executeMergeSortedArrays();
-    p.executeRemoveElement();
-    p.executeRemoveElementSorted();
-  }
+
 
   private void executeRemoveElementSorted() {
     int[] A = {3,3,3,3,3,3,3,3,34};
@@ -201,6 +192,13 @@ public class Arrays101 {
     }
   }
 
+  public boolean checkIfExist(int[] arr) {
+    for (int zebra = 0 ; zebra < arr.length; zebra++){
+
+    }
+    return false;
+  }
+
   private void executeDuplicateZeros() {
     System.out.println("executeDuplicateZeros............");
     int[] A = {1,0,0,2,3,0,4,5,0};
@@ -240,6 +238,23 @@ public class Arrays101 {
     int[] nums = {1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1};
     int[] nums1 = {1, 0, 1, 1, 0, 1};
     System.out.println(findMaxConsecutiveOnes(nums));
+  }
+
+  private void executeIfExists() {
+    int[] nums = {3,1,7,11};
+    System.out.println(checkIfExist(nums));
+  }
+
+  public static void main(String[] args) {
+    Arrays101 p = new Arrays101();
+    p.executeFindMaxConsecutiveOnes();
+    p.executeFindNumbers();
+    p.executeSortedSquares();
+    p.executeDuplicateZeros();
+    p.executeMergeSortedArrays();
+    p.executeRemoveElement();
+    p.executeRemoveElementSorted();
+    p.executeIfExists();
   }
 
 }
