@@ -120,13 +120,25 @@ public class Arrays101 {
   }
 
   public void moveZeroes(int[] nums) {
-
+    for(int readPointer = 0; readPointer < nums.length; readPointer++ ){
+      if (nums[readPointer] == 0){
+        for (int writePtr = readPointer; writePtr < nums.length; writePtr++){
+          if(writePtr != nums.length - 1) {
+            nums[writePtr] = nums[writePtr + 1];
+          }else{
+            nums[nums.length -1] = 0;
+          }
+        }
+      }
+    }
   }
 
   private void executeMoveZeroes(){
     int[] A = {0,12,1,2,0,2,0,2,0};
+    int[] B = {0,0,1};
     System.out.println("executeMoveZeroes....");
-    moveZeroes(A);
+    moveZeroes(B);
+    System.out.println(Arrays.toString(B));
   }
 
   private void executeRemoveElementSorted() {
@@ -353,6 +365,7 @@ public class Arrays101 {
     p.executeIfExists();
     p.executeValidMountain();
     p.executeReplaceElements();
+    p.executeMoveZeroes();
   }
 
 
