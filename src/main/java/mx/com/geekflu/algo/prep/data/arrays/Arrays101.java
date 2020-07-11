@@ -206,18 +206,37 @@ public class Arrays101 {
   }
 
   public boolean validMountainArray(int[] A) {
-    for (int i = 0; i < A.length ; i++){
+    boolean increasing = false;
+    boolean decreasing = false;
+    int peak = 0;
+    for (int i = 0; i < A.length - 1 ; i++){
       if(A[i] < A[i + 1]){
-        continue;
-      }else if()
+        peak = i + 1;
+      }else{
+        break;
+      }
     }
-    return false;
+    if(peak > 0){
+      increasing = true;
+    }
+    for (int i = peak; i < A.length -1 ; i++ ){
+      if(A[i] > A[i + 1]){
+        decreasing = true;
+      }else {
+        decreasing = false;
+      }
+    }
+    return increasing && decreasing;
   }
 
   private void executeValidMountain() {
     System.out.println("executeValidMountain...........");
     int[] A = {0,1,2,3,4,5,678,677,500,300,2,1,0};
+    int[] B = {2,1};//false
+    int[] C = {3,5,5};//false
     System.out.println(validMountainArray(A));
+    System.out.println(validMountainArray(B));
+    System.out.println(validMountainArray(C));
   }
 
   private void executeDuplicateZeros() {
