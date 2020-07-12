@@ -151,6 +151,27 @@ public class Arrays101 {
     p.executeReplaceElements();
     p.executeMoveZeroes();
     p.executeSortArrayByParity();
+    p.executeHeightChecker();
+  }
+
+  public int heightChecker(int[] heights) {
+    int count = 0;
+    if (heights == null || heights.length == 0) return count;
+    int len = heights.length;
+    int[] newArr = new int[heights.length];
+    System.arraycopy(heights, 0, newArr, 0, len);
+    Arrays.sort(newArr);
+    for (int i = 0; i < len; i++) {
+      if (newArr[i] != heights[i])
+        count++;
+    }
+    return count;
+  }
+
+  private void executeHeightChecker() {
+    System.out.println("executeHeightChecker.......");
+    int[] A = {1, 1, 4, 2, 1, 3};
+    System.out.println(heightChecker(A));
   }
 
   public int[] sortArrayByParity(int[] A) {
