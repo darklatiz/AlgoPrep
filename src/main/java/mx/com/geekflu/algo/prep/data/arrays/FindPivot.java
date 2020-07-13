@@ -6,7 +6,7 @@ public class FindPivot {
     if (nums == null) return -1;
     if (nums.length <= 2) return -1;
 
-    int pivot = 1;
+    int pivot = 0;
     int rightSum = 0;
     int leftSum = 0;
 
@@ -18,13 +18,15 @@ public class FindPivot {
       leftSum += nums[i];
     }
 
-    while (pivot < nums.length - 1) {
+    while (pivot < nums.length) {
       if (rightSum == leftSum) {
         return pivot;
       } else {
         pivot++;
-        leftSum += nums[pivot - 1];
-        rightSum -= nums[pivot];
+        if (pivot < nums.length) {
+          leftSum += nums[pivot - 1];
+          rightSum -= nums[pivot];
+        }
       }
     }
     return -1;
