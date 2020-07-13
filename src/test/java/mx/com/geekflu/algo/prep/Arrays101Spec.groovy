@@ -1,6 +1,7 @@
 package mx.com.geekflu.algo.prep
 
 import mx.com.geekflu.algo.prep.data.arrays.MaxConsecutiveOnesII
+import mx.com.geekflu.algo.prep.data.arrays.ThirdMaximumNumber
 import spock.lang.Specification
 
 class Arrays101Spec extends Specification {
@@ -25,7 +26,21 @@ class Arrays101Spec extends Specification {
 
   }
 
-  def "Third Maximum Number"() {
+  def "Third Maximum Number approach 1"() {
+
+    given:
+    ThirdMaximumNumber thirdMaximumNumber = new ThirdMaximumNumber();
+
+    when:
+    def arr = createArray(nums)
+    int num = thirdMaximumNumber.thirdMaxAproach1(arr)
+
+    then:
+    num == numExpected
+
+    where:
+    nums    | numExpected
+    "3,2,1" | 1
 
   }
 
