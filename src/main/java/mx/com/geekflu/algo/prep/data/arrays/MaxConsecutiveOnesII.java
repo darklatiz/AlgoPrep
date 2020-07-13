@@ -21,15 +21,16 @@ public class MaxConsecutiveOnesII {
         onesCounter++;
         maxConsecutiveOnes = Math.max(maxConsecutiveOnes, onesCounter);
       } else if (!wasFlipped) {
+        left = right;
         onesCounter++;
         right++;
         wasFlipped = true;
         maxConsecutiveOnes = Math.max(maxConsecutiveOnes, onesCounter);
       } else {
-        left = right;
         maxConsecutiveOnes = Math.max(maxConsecutiveOnes, onesCounter);
         wasFlipped = false;
         onesCounter = 0;
+        right = left + 1;
       }
     }
     return maxConsecutiveOnes;
