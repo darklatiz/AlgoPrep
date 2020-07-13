@@ -1,6 +1,7 @@
 package mx.com.geekflu.algo.prep
 
 import mx.com.geekflu.algo.prep.data.arrays.MaxConsecutiveOnesII
+import mx.com.geekflu.algo.prep.data.arrays.NumbersDissapeared
 import mx.com.geekflu.algo.prep.data.arrays.ThirdMaximumNumber
 import spock.lang.Specification
 
@@ -44,6 +45,39 @@ class Arrays101Spec extends Specification {
     "4,555" | 555
     "10"    | 10
 
+  }
+
+  def "Find All Numbers Disappeared in an Array too slow"() {
+    given:
+    NumbersDissapeared numbersDissapeared = new NumbersDissapeared();
+
+    when:
+    def arr = createArray(nums)
+    List<Integer> res = numbersDissapeared.findDisappearedNumbers(arr);
+
+    then:
+    res.size() == length
+
+    where:
+    nums              | length
+    "4,3,2,7,8,2,3,1" | 2
+
+  }
+
+  def "Find All Numbers Disappeared in an Array optimal"() {
+    given:
+    NumbersDissapeared numbersDissapeared = new NumbersDissapeared();
+
+    when:
+    def arr = createArray(nums)
+    List<Integer> res = numbersDissapeared.findDisappearedNumbersOptimal(arr);
+
+    then:
+    res.size() == length
+
+    where:
+    nums              | length
+    "4,3,2,7,8,2,3,1" | 2
   }
 
   def createArray(String val) {
