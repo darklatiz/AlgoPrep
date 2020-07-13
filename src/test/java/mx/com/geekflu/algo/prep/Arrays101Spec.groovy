@@ -1,5 +1,6 @@
 package mx.com.geekflu.algo.prep
 
+import mx.com.geekflu.algo.prep.data.arrays.FindPivot
 import mx.com.geekflu.algo.prep.data.arrays.MaxConsecutiveOnesII
 import mx.com.geekflu.algo.prep.data.arrays.NumbersDissapeared
 import mx.com.geekflu.algo.prep.data.arrays.ThirdMaximumNumber
@@ -70,7 +71,7 @@ class Arrays101Spec extends Specification {
 
     when:
     def arr = createArray(nums)
-    List<Integer> res = numbersDissapeared.findDisappearedNumbersOptimal(arr);
+    List<Integer> res = numbersDissapeared.findDisappearedNumbersOptimal(arr)
 
     then:
     res.size() == length
@@ -78,6 +79,27 @@ class Arrays101Spec extends Specification {
     where:
     nums              | length
     "4,3,2,7,8,2,3,1" | 2
+  }
+
+  def "Find Pivot Index"() {
+    given:
+    FindPivot findPivot = new FindPivot();
+
+    when:
+    int pivot = findPivot.pivotIndex(createArray(nums))
+
+    then:
+    pivot == pivotExpected
+
+    where:
+    nums             | pivotExpected
+    "1,2,3,8,0,0,6"  | 3
+    "1"              | -1
+    "1,2"            | -1
+    "1,2,1"          | 1
+    "1,2,0"          | -1
+    "1,7,3,6,5,6"    | 3
+    "-1,-1,-1,0,1,1" | 0
   }
 
   def createArray(String val) {
