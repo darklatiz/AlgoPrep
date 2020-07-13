@@ -10,11 +10,7 @@ class Arrays101Spec extends Specification {
     MaxConsecutiveOnesII maxConsecutiveOnesII = new MaxConsecutiveOnesII()
 
     when:
-    String[] n = nums.split(",")
-    def A = new int[n.length]
-    for (int i = 0; i < n.length; i++) {
-      A[i] = Integer.parseInt(n[i])
-    }
+    def A = createArray(nums)
     int count = maxConsecutiveOnesII.findMaxConsecutiveOnes(A)
 
     then:
@@ -30,6 +26,16 @@ class Arrays101Spec extends Specification {
   }
 
   def "Third Maximum Number"() {
+
+  }
+
+  def createArray(String val) {
+    String[] n = val.split(",")
+    def A = new int[n.length]
+    for (int i = 0; i < n.length; i++) {
+      A[i] = Integer.parseInt(n[i])
+    }
+    return A
   }
 
 }
