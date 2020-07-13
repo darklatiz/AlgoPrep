@@ -26,14 +26,14 @@ class Arrays101Spec extends Specification {
 
   }
 
-  def "Third Maximum Number approach 1"() {
+  def "Third Maximum Number"() {
 
     given:
     ThirdMaximumNumber thirdMaximumNumber = new ThirdMaximumNumber();
 
     when:
     def arr = createArray(nums)
-    int num = thirdMaximumNumber.thirdMaxAproach1(arr)
+    int num = thirdMaximumNumber.thirdMaxApproach1(arr)
 
     then:
     num == numExpected
@@ -41,6 +41,8 @@ class Arrays101Spec extends Specification {
     where:
     nums    | numExpected
     "3,2,1" | 1
+    "4,555" | 555
+    "10"    | 10
 
   }
 
