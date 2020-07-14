@@ -1,9 +1,6 @@
 package mx.com.geekflu.algo.prep
 
-import mx.com.geekflu.algo.prep.data.arrays.FindPivot
-import mx.com.geekflu.algo.prep.data.arrays.MaxConsecutiveOnesII
-import mx.com.geekflu.algo.prep.data.arrays.NumbersDissapeared
-import mx.com.geekflu.algo.prep.data.arrays.ThirdMaximumNumber
+import mx.com.geekflu.algo.prep.data.arrays.*
 import spock.lang.Specification
 
 class Arrays101Spec extends Specification {
@@ -110,6 +107,23 @@ class Arrays101Spec extends Specification {
       A[i] = Integer.parseInt(n[i])
     }
     return A
+  }
+
+  def "dominant numbe"() {
+    given:
+    DominantNumber number = new DominantNumber()
+
+    when:
+    int nd = number.dominantIndex(createArray(nums))
+
+    then:
+    nd == numberExpected
+
+    where:
+    nums      | numberExpected
+    "0,0,0,1" | 3
+    "1,2,3,4" | -1
+    "3,6,1,0" | 1
   }
 
 }
