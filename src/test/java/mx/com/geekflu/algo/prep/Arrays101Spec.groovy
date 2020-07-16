@@ -126,4 +126,21 @@ class Arrays101Spec extends Specification {
     "3,6,1,0" | 1
   }
 
+  def "Plus one"() {
+
+    given:
+    PlusOne plusOne = new PlusOne();
+
+    when:
+    int[] res = plusOne.plusOne(createArray(nums))
+
+    then:
+    res == expected
+
+    where:
+    nums      | expected
+    "1,2,3"   | [1, 2, 4]
+    "4,3,2,1" | [4, 3, 2, 2]
+  }
+
 }
