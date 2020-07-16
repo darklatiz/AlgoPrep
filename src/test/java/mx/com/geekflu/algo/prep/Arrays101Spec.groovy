@@ -104,7 +104,7 @@ class Arrays101Spec extends Specification {
     String[] n = val.split(",")
     def A = new int[n.length]
     for (int i = 0; i < n.length; i++) {
-      A[i] = Integer.parseInt(n[i])
+      A[i] = Integer.parseInt(n[i].trim())
     }
     return A
   }
@@ -138,9 +138,12 @@ class Arrays101Spec extends Specification {
     res == expected
 
     where:
-    nums      | expected
-    "1,2,3"   | [1, 2, 4]
-    "4,3,2,1" | [4, 3, 2, 2]
+    nums                     | expected
+    "9"                      | [0]
+    "1, 9, 9, 9"             | [2, 0, 0, 0]
+    "1, 2, 3, 9, 9, 3, 9, 9" | [1, 2, 3, 9, 9, 4, 0, 0]
+    "1, 2, 3"                | [1, 2, 4]
+    "4, 3, 2, 1"             | [4, 3, 2, 2]
   }
 
 }
