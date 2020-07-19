@@ -3,8 +3,8 @@ package mx.com.geekflu.algo.prep.data.arrays;
 public class DiagonalTraverse {
 
   public static void main(String[] args) {
-    int row = 143;
-    int col = 162;
+    int row = 10;
+    int col = 10;
 
     int[][] A = new int[row][col];
     int iterations = 0;
@@ -27,26 +27,40 @@ public class DiagonalTraverse {
     }
 
     System.out.println("Iterations :" + (iterations - 1));
-
+    int[][] m = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    DiagonalTraverse diagonalTraverse = new DiagonalTraverse();
+    diagonalTraverse.findDiagonalOrder(m);
   }
 
   public int[] findDiagonalOrder(int[][] matrix) {
     int rowLen = matrix.length;
     int colLen = matrix[0].length;
     int[] A = new int[rowLen * colLen];
+    int iterations = rowLen + colLen - 1;
+    int index = 0;
 
-    int row = 0;
-    int col = 0;
-
-    int currLine = 0;
-
-    int deltaRow = 0;
-    int deltaCol = 0;
-
-    while (row < rowLen && col < colLen) {
-
+    for (int i = 0; i < iterations; i++) {
+      if (i % 2 == 0) {
+        int x = i < rowLen ? i : rowLen - 1;
+        int y = i < rowLen ? 0 : i - (rowLen - 1);
+        while (x >= 0 && y < colLen) {
+          A[index++] = matrix[x--][y++];
+        }
+      } else {
+        int x = i < colLen ? 0 : i - (colLen - 1);
+        int y = i < colLen ? i : colLen - 1;
+        while (x < rowLen && y >= 0) {
+          A[index++] = matrix[x++][y--];
+        }
+      }
     }
-    return null;
+
+
+    return A;
   }
 
   int getNumIterations(int row, int cols) {
