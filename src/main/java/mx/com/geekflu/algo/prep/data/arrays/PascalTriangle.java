@@ -1,11 +1,13 @@
 package mx.com.geekflu.algo.prep.data.arrays;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PascalTriangle {
 
   public List<List<Integer>> generate(int numRows) {
+    BigInteger
     List<List<Integer>> triangle = new ArrayList<>();
     if (numRows <= 0) return triangle;
 
@@ -34,6 +36,15 @@ public class PascalTriangle {
       triangle.add(current);
     }
     return triangle;
+  }
+
+  public int strStr(String haystack, String needle) {
+    int index = haystack.indexOf(needle);
+    return index;
+  }
+
+  public String longestCommonPrefix(String[] strs) {
+
   }
 
 }
