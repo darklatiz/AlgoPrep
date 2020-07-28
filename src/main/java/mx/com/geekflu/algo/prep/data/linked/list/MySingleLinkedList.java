@@ -30,6 +30,10 @@ public class MySingleLinkedList {
 
         mySingleLinkedList.addAtIndex(1, 1);
         mySingleLinkedList.print();
+
+        mySingleLinkedList.addAtIndex(10, -1010); //not inserted
+        mySingleLinkedList.addAtIndex(6, -1010);
+        mySingleLinkedList.print();
     }
 
     /**
@@ -95,6 +99,7 @@ public class MySingleLinkedList {
                 newNode.next = current.next;
                 current.next = newNode;
             }
+            size++;
         }
 
     }
