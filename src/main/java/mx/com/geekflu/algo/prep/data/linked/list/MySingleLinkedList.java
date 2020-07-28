@@ -32,18 +32,83 @@ public class MySingleLinkedList {
         mySingleLinkedList.print();
 
         mySingleLinkedList.addAtIndex(10, -1010); //not inserted
+        mySingleLinkedList.print();
+
         mySingleLinkedList.addAtIndex(6, -1010);
         mySingleLinkedList.print();
+
+        mySingleLinkedList.addAtIndex(4, -2020);
+        mySingleLinkedList.print();
+
+        System.out.println(mySingleLinkedList.get(4));
+        mySingleLinkedList.deleteAtIndex(4);
+        mySingleLinkedList.print();
+
+        System.out.println(mySingleLinkedList.get(4));
+
+        MySingleLinkedList linkedList = new MySingleLinkedList();
+        linkedList.addAtHead(1);
+        linkedList.addAtTail(3);
+        linkedList.print();
+        linkedList.addAtIndex(1, 2);  // linked list becomes 1->2->3
+        linkedList.print();
+        System.out.println(linkedList.get(1));            // returns 2
+        linkedList.deleteAtIndex(1);  // now the linked list is 1->3
+        linkedList.print();
+        System.out.println(linkedList.get(1));
+
+        System.out.println("_____________________________________________");
+        MySingleLinkedList linkedList1 = new MySingleLinkedList();
+        linkedList1.addAtHead(1);
+        linkedList1.print();
+
+        linkedList1.addAtTail(3);
+        linkedList1.print();
+
+        linkedList1.addAtIndex(1, 2);
+        linkedList1.print();
+        System.out.println(linkedList1.get(1));
+
+        linkedList1.deleteAtIndex(0);
+        linkedList1.print();
+        System.out.println(linkedList1.get(0));
+
+        System.out.println("_____________________________________________");
+        MySingleLinkedList linkedList2 = new MySingleLinkedList();
+        linkedList2.addAtIndex(0, 10);
+        linkedList2.print();
+        linkedList2.addAtIndex(0, 20);
+        linkedList2.print();
+        linkedList2.addAtIndex(1, 30);
+        linkedList2.print();
+        System.out.println(linkedList2.get(0));
+
+        System.out.println("_____________________________________________");
+        MySingleLinkedList linkedList3 = new MySingleLinkedList();
+        linkedList3.addAtHead(9);
+        System.out.println(linkedList3.get(1));
+        linkedList3.addAtIndex(1, 1);
+        linkedList3.addAtIndex(1, 7);
+        linkedList3.deleteAtIndex(1);
+        linkedList3.addAtHead(7);
+        linkedList3.addAtHead(4);
+        linkedList3.deleteAtIndex(1);
+        linkedList3.addAtIndex(1, 4);
+        linkedList3.addAtHead(2);
+        linkedList3.deleteAtIndex(5);
+        linkedList3.print();
+
+
     }
 
     /**
      * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
      */
     public int get(int index) {
-        if (index < 0) return -1;
+        if (index < 0 || index > size - 1) return -1;
         Node current = head;
         int i = 0;
-        while (i != index - 1) {
+        while (i != index) {
             current = current.next;
             i++;
         }
@@ -82,17 +147,23 @@ public class MySingleLinkedList {
      * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
      */
     public void addAtIndex(int index, int val) {
+        if (head == null) {
+            Node n = new Node(val);
+            this.head = n;
+            size++;
+            return;
+        }
         Node current = head;
 
         if (index == this.size) {
             addAtTail(val);
         } else if (index < this.size) {
-            while (index - 2 > 0) {
+            while (index - 1 > 0) {
                 current = current.next;
                 index--;
             }
             Node newNode = new Node(val);
-            if (index - 2 == -1) { // head
+            if (index - 1 == -1) { // head
                 newNode.next = head;
                 head = newNode;
             } else {
@@ -109,12 +180,19 @@ public class MySingleLinkedList {
      */
     public void deleteAtIndex(int index) {
         Node current = head;
-        int step = 0;
-        while (step != index - 2) {
-            current = current.next;
-            step++;
+        if (index >= 0 && index < size) {
+            while (index - 1 > 0) {
+                current = current.next;
+                index--;
+            }
+
+            if (index - 1 == -1) { // head
+                head = head.next;
+            } else {
+                current.next = current.next.next;
+            }
+            size--;
         }
-        current.next = current.next.next;
     }
 
     public void print() {
