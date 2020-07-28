@@ -89,12 +89,19 @@ public class MySingleLinkedList {
         System.out.println(linkedList3.get(1));
         linkedList3.addAtIndex(1, 1);
         linkedList3.addAtIndex(1, 7);
+        linkedList3.print();
         linkedList3.deleteAtIndex(1);
+        linkedList3.print();
         linkedList3.addAtHead(7);
+        linkedList3.print();
         linkedList3.addAtHead(4);
+        linkedList3.print();
         linkedList3.deleteAtIndex(1);
+        linkedList3.print();
         linkedList3.addAtIndex(1, 4);
+        linkedList3.print();
         linkedList3.addAtHead(2);
+        linkedList3.print();
         linkedList3.deleteAtIndex(5);
         linkedList3.print();
 
@@ -113,6 +120,17 @@ public class MySingleLinkedList {
             i++;
         }
         return current.val;
+    }
+
+    public Node getAtIndex(int index) {
+        if (index < 0 || index > size - 1) return null;
+        Node current = head;
+        int i = 0;
+        while (i != index) {
+            current = current.next;
+            i++;
+        }
+        return current;
     }
 
     /**
@@ -153,15 +171,10 @@ public class MySingleLinkedList {
             size++;
             return;
         }
-        Node current = head;
-
         if (index == this.size) {
             addAtTail(val);
         } else if (index < this.size) {
-            while (index - 1 > 0) {
-                current = current.next;
-                index--;
-            }
+            Node current = getAtIndex(index - 1); //we stand before the actual node
             Node newNode = new Node(val);
             if (index - 1 == -1) { // head
                 newNode.next = head;
@@ -179,13 +192,8 @@ public class MySingleLinkedList {
      * Delete the index-th node in the linked list, if the index is valid.
      */
     public void deleteAtIndex(int index) {
-        Node current = head;
         if (index >= 0 && index < size) {
-            while (index - 1 > 0) {
-                current = current.next;
-                index--;
-            }
-
+            Node current = getAtIndex(index - 1); // before the actual node to delete
             if (index - 1 == -1) { // head
                 head = head.next;
             } else {
