@@ -1,5 +1,6 @@
 package mx.com.geekflu.algo.prep
 
+import mx.com.geekflu.algo.prep.data.leetcode.DefangingIPAddress
 import mx.com.geekflu.algo.prep.data.leetcode.Helpers
 import mx.com.geekflu.algo.prep.data.leetcode.RemoveVowelsFromString
 import mx.com.geekflu.algo.prep.data.leetcode.RunningSum1DArray
@@ -41,6 +42,22 @@ class LeetCodeEasySpec extends Specification {
         testCase  | resultCase
         "1,1,1,1" | "1,2,3,4"
         "1,2,3,4" | "1,3,6,10"
+    }
+
+    def "Defanging IP Addresses"() {
+        given:
+        DefangingIPAddress defangingIPAddress = new DefangingIPAddress()
+
+        when:
+        String result = defangingIPAddress.defangIPaddr(testCase)
+
+        then:
+        result == resultCase
+
+        where:
+        testCase       | resultCase
+        "1.1.1.1"      | "1[.]1[.]1[.]1"
+        "255.100.50.0" | "255[.]100[.]50[.]0"
     }
 
 }
