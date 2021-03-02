@@ -5,6 +5,7 @@ import mx.com.geekflu.algo.prep.data.leetcode.DefangingIPAddress
 import mx.com.geekflu.algo.prep.data.leetcode.Helpers
 import mx.com.geekflu.algo.prep.data.leetcode.KidsWithTheGreatestNumberOfCandies
 import mx.com.geekflu.algo.prep.data.leetcode.RemoveVowelsFromString
+import mx.com.geekflu.algo.prep.data.leetcode.RichestCustomerWealth
 import mx.com.geekflu.algo.prep.data.leetcode.RunningSum1DArray
 import mx.com.geekflu.algo.prep.data.leetcode.ShuffleTheArray
 import spock.lang.Specification
@@ -101,7 +102,6 @@ class LeetCodeEasySpec extends Specification {
     def "Count Items Matching The Rule"() {
         given:
         CountItemsMatchingTheRule itemsMatchingTheRule = new CountItemsMatchingTheRule()
-        List<List<String>> data = new ArrayList<>();
 
         when:
         int matches = itemsMatchingTheRule.countMatches(Helpers.createListOfListsFromString(rawData, ",", "#"), ruleKey, ruleValue)
@@ -113,6 +113,22 @@ class LeetCodeEasySpec extends Specification {
         rawData                                                                      | resultMatches | ruleKey | ruleValue
         "phone,blue,pixel#phone,blue,pixel#computer,silver,lenovo#phone,gold,iphone" | 1             | "color" | "silver"
         "phone,blue,pixel#computer,silver,phone#phone,gold,iphone"                   | 2             | "type"  | "phone"
+    }
+
+    def "Richest Customer Wealth"() {
+        given:
+        RichestCustomerWealth customerWealth = new RichestCustomerWealth()
+
+        when:
+        int num = customerWealth.maximumWealth(Helpers.create2dIntArray(rawData, ",", "#"))
+
+        then:
+        num == resultMatches
+        where:
+        rawData             | resultMatches
+        "1,2,3#3,2,1"       | 6
+        "1,7#7,3#3,5"       | 10
+        "2,8,7#7,1,3#1,9,5" | 17
     }
 
 }
