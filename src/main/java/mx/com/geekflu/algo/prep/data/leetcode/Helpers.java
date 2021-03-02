@@ -1,6 +1,7 @@
 package mx.com.geekflu.algo.prep.data.leetcode;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Helpers {
@@ -19,6 +20,12 @@ public class Helpers {
   public static String createStringFromArray(int[] array, String separator) {
     return Arrays.stream(array)
         .mapToObj(String::valueOf)
+        .collect(Collectors.joining(separator));
+  }
+
+  public static String createStringFromList(List<Boolean> booleans, String separator) {
+    return booleans.stream()
+        .map(String::valueOf)
         .collect(Collectors.joining(separator));
   }
 }
