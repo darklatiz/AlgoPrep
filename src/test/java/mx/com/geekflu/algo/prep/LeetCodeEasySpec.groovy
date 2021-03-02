@@ -102,20 +102,17 @@ class LeetCodeEasySpec extends Specification {
         given:
         CountItemsMatchingTheRule itemsMatchingTheRule = new CountItemsMatchingTheRule()
         List<List<String>> data = new ArrayList<>();
-        data.add(Arrays.asList("phone", "blue", "pixel"))
-        data.add(Arrays.asList("phone", "blue", "pixel"))
-        data.add(Arrays.asList("computer", "silver", "lenovo"))
-        data.add(Arrays.asList("phone", "gold", "iphone"))
 
         when:
-        int matches = itemsMatchingTheRule.countMatches(data, "color", "silver")
+        int matches = itemsMatchingTheRule.countMatches(Helpers.createListOfListsFromString(rawData, ",", "#"), ruleKey, ruleValue)
 
         then:
         matches == resultMatches
 
         where:
-        rawData | resultMatches | _
-        ""      | 1             | _
+        rawData                                                                      | resultMatches | ruleKey | ruleValue
+        "phone,blue,pixel#phone,blue,pixel#computer,silver,lenovo#phone,gold,iphone" | 1             | "color" | "silver"
+        "phone,blue,pixel#computer,silver,phone#phone,gold,iphone"                   | 2             | "type"  | "phone"
     }
 
 }
