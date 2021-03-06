@@ -34,7 +34,7 @@ public class Helpers {
     return data;
   }
 
-  public static int[] createArrayFromString(String input, String splitter) {
+  public static int[] createArrayOfIntegersFromString(String input, String splitter) {
     String []sNums = input.split(splitter);
     return Arrays.stream(sNums)
         .map(Integer::parseInt)

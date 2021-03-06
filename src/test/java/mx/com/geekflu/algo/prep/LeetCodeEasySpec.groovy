@@ -8,6 +8,7 @@ import mx.com.geekflu.algo.prep.data.leetcode.RemoveVowelsFromString
 import mx.com.geekflu.algo.prep.data.leetcode.RichestCustomerWealth
 import mx.com.geekflu.algo.prep.data.leetcode.RunningSum1DArray
 import mx.com.geekflu.algo.prep.data.leetcode.ShuffleTheArray
+import mx.com.geekflu.algo.prep.data.leetcode.TwoSum
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -35,7 +36,7 @@ class LeetCodeEasySpec extends Specification {
     def "Running sum 1D Array"() {
         given:
         RunningSum1DArray runningSum1DArray = new RunningSum1DArray()
-        int[] nums = Helpers.createArrayFromString(testCase, ",")
+        int[] nums = Helpers.createArrayOfIntegersFromString(testCase, ",")
 
         when:
         int[] res = runningSum1DArray.runningSum(nums)
@@ -67,7 +68,7 @@ class LeetCodeEasySpec extends Specification {
     def "Kids With The Greatest Number Of Candies"() {
         given:
         KidsWithTheGreatestNumberOfCandies kidsCandies = new KidsWithTheGreatestNumberOfCandies()
-        int[] candies = Helpers.createArrayFromString(testCase, ",")
+        int[] candies = Helpers.createArrayOfIntegersFromString(testCase, ",")
 
         when:
         List<Boolean> result = kidsCandies.kidsWithCandies(candies, extraCandies)
@@ -86,7 +87,7 @@ class LeetCodeEasySpec extends Specification {
     def "Shuffle The Array"() {
         given:
         ShuffleTheArray shuffleTheArray = new ShuffleTheArray()
-        int[] nums = Helpers.createArrayFromString(testCase, ",")
+        int[] nums = Helpers.createArrayOfIntegersFromString(testCase, ",")
 
         when:
         int[] res = shuffleTheArray.shuffle(nums, n)
@@ -129,6 +130,22 @@ class LeetCodeEasySpec extends Specification {
         "1,2,3#3,2,1"       | 6
         "1,7#7,3#3,5"       | 10
         "2,8,7#7,1,3#1,9,5" | 17
+    }
+
+    def "Two Sum"() {
+        given:
+        TwoSum twoSum = new TwoSum()
+
+        when:
+        int[] idx = twoSum.twoSum(Helpers.createArrayOfIntegersFromString(rawData, ","), target)
+
+        then:
+        resultMatches == Helpers.createStringFromArray(idx, ",")
+        where:
+        rawData     | target | resultMatches
+        "2,7,11,15" | 9      | "0,1"
+        "3,2,4"     | 6      | "1,2"
+        "4,2,3"     | 6      | "0,1"
     }
 
 }
