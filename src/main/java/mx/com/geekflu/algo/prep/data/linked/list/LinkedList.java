@@ -95,7 +95,11 @@ public class LinkedList<T> implements AbstractList<T> {
 
   @Override
   public void clear() {
-
+    if (!isEmpty()) {
+      this.head = null;
+      this.tail = null;
+      this.size = 0;
+    }
   }
 
   @Override

@@ -12,6 +12,8 @@ public class LinkedListTest {
   @Test
   public void create_link_list() {
     LinkedList<String> myStringLinkedList = new LinkedList<>();
+    Assert.assertEquals(0, myStringLinkedList.size());
+
     myStringLinkedList.appendFirst("h");
     myStringLinkedList.appendFirst("0");
     myStringLinkedList.appendFirst("l");
@@ -28,6 +30,9 @@ public class LinkedListTest {
     myStringLinkedList.print(Direction.TAIL2HEAD);
 
     Assert.assertEquals(10, myStringLinkedList.size());
+
+    myStringLinkedList.clear();
+    Assert.assertEquals(0, myStringLinkedList.size());
   }
 
 
