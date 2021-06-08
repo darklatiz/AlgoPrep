@@ -117,13 +117,9 @@ public class LinkedList<T> implements AbstractList<T> {
     }
   }
 
-  public static void main(String[] args) {
-    LinkedList<String> myStringLinkedList = new LinkedList<>();
-    myStringLinkedList.appendFirst("h");
-    myStringLinkedList.appendFirst("0");
-    myStringLinkedList.appendFirst("l");
-    myStringLinkedList.appendFirst("a");
-    myStringLinkedList.print(Direction.HEAD2TAIL);
-    myStringLinkedList.print(Direction.TAIL2HEAD);
+  @Override
+  public int size() {
+    return this.size;
   }
+
 }

@@ -16,6 +16,7 @@ public interface AbstractList<T> {
   boolean isEmpty();
   void clear();
   void print(Direction direction);
+  int size();
 
 
 }
