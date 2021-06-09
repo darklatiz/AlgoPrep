@@ -58,7 +58,7 @@ public class LinkedList<T> implements AbstractList<T> {
   }
 
   @Override
-  public boolean append(int position, T data) {
+  public boolean insert(int position, T data) {
     if (isEmpty()) {
       return appendFirst(data);
     } else {
@@ -105,20 +105,24 @@ public class LinkedList<T> implements AbstractList<T> {
   @Override
   public void print(Direction direction) {
     Node<T> initialNode = null;
+    StringBuilder stringBuilder = new StringBuilder();
     if (direction == Direction.HEAD2TAIL) {
       initialNode = this.head;
+      stringBuilder.append("HEAD -> ");
     } else {
+      stringBuilder.append("TAIL -> ");
       initialNode = this.tail;
     }
-    log.info("Using printing direction {}", direction);
     while (Objects.nonNull(initialNode)) {
-      log.info("{}", initialNode.getItem());
+      stringBuilder.append(initialNode.getItem());
+      stringBuilder.append(" -> ");
       if (direction == Direction.HEAD2TAIL) {
         initialNode = initialNode.getNext();
       }else {
         initialNode = initialNode.getPrev();
       }
     }
+    log.info(stringBuilder.toString());
   }
 
   @Override

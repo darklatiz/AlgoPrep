@@ -6,13 +6,19 @@ import mx.com.geekflu.algo.prep.data.linked.list.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Slf4j
 public class LinkedListTest {
 
   @Test
   public void create_link_list() {
     LinkedList<String> myStringLinkedList = new LinkedList<>();
-    Assert.assertEquals(0, myStringLinkedList.size());
 
     myStringLinkedList.appendFirst("h");
     myStringLinkedList.appendFirst("0");
@@ -31,8 +37,23 @@ public class LinkedListTest {
 
     Assert.assertEquals(10, myStringLinkedList.size());
 
-    myStringLinkedList.clear();
-    Assert.assertEquals(0, myStringLinkedList.size());
+  }
+
+  @Test
+  public void test_is_empty_clear() {
+    LinkedList<Integer> integerLinkedList = new LinkedList<>();
+
+    Assert.assertEquals(0, integerLinkedList.size());
+    Assert.assertTrue(integerLinkedList.isEmpty());
+
+    integerLinkedList.clear();
+
+    List<String> days = Arrays.asList("m", "h", "j");
+    Map<String, Boolean> test = days.stream().collect(Collectors.toMap(s -> s, v -> Boolean.TRUE));
+    if(test.get("y"))
+      log.info("WHAT");
+    test.isEmpty();
+    test.size();
   }
 
 

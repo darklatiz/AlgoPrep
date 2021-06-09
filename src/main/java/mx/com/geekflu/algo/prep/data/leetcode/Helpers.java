@@ -2,6 +2,7 @@ package mx.com.geekflu.algo.prep.data.leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,5 +54,18 @@ public class Helpers {
     return booleans.stream()
         .map(String::valueOf)
         .collect(Collectors.joining(separator));
+  }
+
+  public static void main(String[] args) {
+    LinkedList<String> strings = new LinkedList<>();
+    strings.add("1");
+    strings.add("2");
+    strings.add("3");
+    System.out.println(strings.poll());
+    System.out.println(strings.poll());
+    System.out.println(strings.poll());
+    System.out.println(strings.poll());
+    System.out.println(strings.poll());
+    System.out.println(strings.poll());
   }
 }
