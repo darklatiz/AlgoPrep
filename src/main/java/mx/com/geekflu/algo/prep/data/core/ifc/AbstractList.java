@@ -1,5 +1,4 @@
 package mx.com.geekflu.algo.prep.data.core.ifc;
-
 import mx.com.geekflu.algo.prep.data.core.Node;
 
 import java.util.Collection;
@@ -7,6 +6,8 @@ import java.util.Collection;
 public interface AbstractList<T> {
 
   Node<T> get(int position);
+  Node<T> getFirst();
+  Node<T> getLast();
   boolean append(T data);
   boolean appendFirst(T data);
   boolean insert(int position, T data);
@@ -16,6 +17,7 @@ public interface AbstractList<T> {
   boolean isEmpty();
   void clear();
   void print(Direction direction);
+  void print();
   int size();
 
 

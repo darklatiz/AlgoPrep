@@ -6,13 +6,6 @@ import mx.com.geekflu.algo.prep.data.linked.list.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @Slf4j
 public class LinkedListTest {
 
@@ -40,22 +33,28 @@ public class LinkedListTest {
   }
 
   @Test
-  public void test_is_empty_clear() {
-    LinkedList<Integer> integerLinkedList = new LinkedList<>();
-
-    Assert.assertEquals(0, integerLinkedList.size());
-    Assert.assertTrue(integerLinkedList.isEmpty());
-
-    integerLinkedList.clear();
-
-    List<String> days = Arrays.asList("m", "h", "j");
-    Map<String, Boolean> test = days.stream().collect(Collectors.toMap(s -> s, v -> Boolean.TRUE));
-    if(test.get("y"))
-      log.info("WHAT");
-    test.isEmpty();
-    test.size();
+  public void test_create_a_list_using_insert_position() {
+    LinkedList<String> linkedList = new LinkedList<>();
+    linkedList.insert(1, "T");
+    Assert.assertFalse(linkedList.isEmpty());
+    Assert.assertEquals("T", linkedList.getFirst().getItem());
+    Assert.assertTrue("This will be inserted @ first position since list is empty", linkedList.insert(2, "T"));
+    linkedList.print();
+    Assert.assertTrue(linkedList.insert(3, "a")); // insert @ the end
+    linkedList.print();
+    Assert.assertTrue(linkedList.insert(1, "b")); // insert @ the end
+    Assert.assertEquals(3, linkedList.size());
+    linkedList.print();
+    Assert.assertTrue(linkedList.insert(1, "M")); // insert @ the end
+    linkedList.print();
+    linkedList.print(Direction.TAIL2HEAD);
   }
 
-
-
+  @Test
+  public void test_is_empty_clear() {
+    LinkedList<Integer> integerLinkedList = new LinkedList<>();
+    Assert.assertEquals(0, integerLinkedList.size());
+    Assert.assertTrue(integerLinkedList.isEmpty());
+    integerLinkedList.clear();
+  }
 }
