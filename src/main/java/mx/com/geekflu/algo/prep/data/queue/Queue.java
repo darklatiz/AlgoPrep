@@ -54,4 +54,9 @@ public class Queue<T> implements Queueable<T>, Printable {
     return this.orderQueue.isEmpty();
   }
 
+  @Override
+  public int size() {
+    return this.orderQueue.size();
+  }
+
 }

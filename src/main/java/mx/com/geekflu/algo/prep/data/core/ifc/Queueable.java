@@ -23,5 +23,7 @@ public interface Queueable<T> {
 
   boolean isEmpty();
 
+  int size();
+
 
 }
