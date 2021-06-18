@@ -163,7 +163,8 @@ public class LinkedList<T> implements AbstractList<T> {
     }
   }
 
-  private Node<T> moveTo(int position) {
+  @Override
+  public Node<T> moveTo(int position) {
     var current = this.head;
     for (var i = 0; i < position; i++) {
       current = current.getNext();
@@ -177,7 +178,8 @@ public class LinkedList<T> implements AbstractList<T> {
    * @param data
    * @return
    */
-  private Node<T> moveTo(T data) {
+  @Override
+  public Node<T> moveTo(T data) {
     var current = this.head;
     while (current != null && !current.getItem().equals(data)) {
       current = current.getNext();

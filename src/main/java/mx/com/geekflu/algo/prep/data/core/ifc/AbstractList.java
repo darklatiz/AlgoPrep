@@ -1,8 +1,10 @@
 package mx.com.geekflu.algo.prep.data.core.ifc;
 
+import mx.com.geekflu.algo.prep.data.core.Node;
+
 import java.util.Collection;
 
-public interface AbstractList<T> {
+public interface AbstractList<T> extends Printable {
 
   T get(int position);
   T getFirst();
@@ -16,8 +18,9 @@ public interface AbstractList<T> {
   boolean isEmpty();
   void clear();
   void print(Direction direction);
-  void print();
   int size();
+  Node<T> moveTo(int position);
+  Node<T> moveTo(T data);
 
 
 }
