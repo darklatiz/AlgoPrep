@@ -165,6 +165,11 @@ public class LinkedList<T> implements AbstractList<T> {
 
   @Override
   public Node<T> moveTo(int position) {
+
+    if (isEmpty() || position > this.size - 1) {
+      return null;
+    }
+
     var current = this.head;
     for (var i = 0; i < position; i++) {
       current = current.getNext();
