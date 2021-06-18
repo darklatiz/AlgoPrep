@@ -27,11 +27,12 @@ public class LinkedList<T> implements AbstractList<T> {
 
   /**
    * Zero based position
+   *
    * @param position
    * @return
    */
   @Override
-  public Node<T> get(int position) {
+  public T get(int position) {
     if (position < 0 || position > this.size - 1) {
       return null;
     } else if (position == 0) {
@@ -40,17 +41,17 @@ public class LinkedList<T> implements AbstractList<T> {
       return getLast();
     } else {
       Node<T> current = this.head;
-      for (int i = 0; i <= position; i++) {
+      for (var i = 0; i <= position; i++) {
         current = current.getNext();
       }
-      Node<T> prev = current.getPrev();
-      Node<T> next = current.getNext();
+      var prev = current.getPrev();
+      var next = current.getNext();
       current.setNext(null);
       current.setPrev(null);
       prev.setNext(next);
       next.setPrev(prev);
       this.size--;
-      return current;
+      return current.getItem();
     }
   }
 
@@ -60,25 +61,42 @@ public class LinkedList<T> implements AbstractList<T> {
    * @return first element
    */
   @Override
-  public Node<T> getFirst() {
+  public T getFirst() {
     if (!isEmpty()) {
-      Node<T> next = this.head.getNext();
+      var next = this.head.getNext();
       this.head.setNext(null);
 
       if (Objects.nonNull(next)) {
         next.setPrev(null);
       }
-      Node<T> ret = this.head;
+      var ret = this.head;
       this.head = next;
       this.size--;
-      return ret;
+      return ret.getItem();
     }
     return null;
   }
 
   @Override
-  public Node<T> getLast() {
-    return null;
+  public T getLast() {
+    if (isEmpty()) {
+      return null;
+    }
+    if (this.head == this.tail) {
+      var ret = this.head.getItem();
+      this.head = null;
+      this.tail = null;
+      this.size--;
+      return ret;
+    }else {
+      var prev = this.tail.getPrev();
+      var current = this.tail;
+      current.setPrev(null);
+      prev.setNext(null);
+      this.size--;
+      this.tail = prev;
+      return current.getItem();
+    }
   }
 
   /**
@@ -89,8 +107,11 @@ public class LinkedList<T> implements AbstractList<T> {
    */
   @Override
   public boolean append(T data) {
-    Node<T> newNode = new Node<>(data);
-    Node<T> current = this.tail;
+    if (isEmpty()) {
+      return appendFirst(data);
+    }
+    var newNode = new Node<>(data);
+    var current = this.tail;
     this.tail.setNext(newNode);
     this.tail = newNode;
     this.tail.setPrev(current);
@@ -100,12 +121,12 @@ public class LinkedList<T> implements AbstractList<T> {
 
   @Override
   public boolean appendFirst(T data) {
-    Node<T> newNode = new Node<>(data);
+    var newNode = new Node<>(data);
     if (isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
     } else {
-      Node<T> after = this.head;
+      var after = this.head;
       this.head = newNode;
       this.head.setNext(after);
       after.setPrev(this.head);
@@ -116,6 +137,7 @@ public class LinkedList<T> implements AbstractList<T> {
 
   /**
    * Position zero based
+   *
    * @param position
    * @param data
    * @return
@@ -124,12 +146,12 @@ public class LinkedList<T> implements AbstractList<T> {
   public boolean insert(int position, T data) {
     if (isEmpty()) {
       return appendFirst(data);
-    } else if(position < 0 || position > this.size - 1) {
+    } else if (position < 0 || position > this.size - 1) {
       return append(data);
     } else {
-      Node<T> newNode = new Node<>(data);
-      Node<T> current = moveTo(position);
-      Node<T> prev = current.getPrev();
+      var newNode = new Node<>(data);
+      var current = moveTo(position);
+      var prev = current.getPrev();
 
       prev.setNext(newNode);
       newNode.setPrev(prev);
@@ -142,8 +164,22 @@ public class LinkedList<T> implements AbstractList<T> {
   }
 
   private Node<T> moveTo(int position) {
-    Node<T> current = this.head;
-    for (int i = 0; i < position; i++) {
+    var current = this.head;
+    for (var i = 0; i < position; i++) {
+      current = current.getNext();
+    }
+    return current;
+  }
+
+  /**
+   * firs occurrence
+   *
+   * @param data
+   * @return
+   */
+  private Node<T> moveTo(T data) {
+    var current = this.head;
+    while (current != null && !current.getItem().equals(data)) {
       current = current.getNext();
     }
     return current;
@@ -151,16 +187,63 @@ public class LinkedList<T> implements AbstractList<T> {
 
   @Override
   public boolean remove(T data) {
-    return false;
+    if (Objects.isNull(data) || isEmpty()) {
+      return false;
+    }
+    var node = moveTo(data);
+
+    if (Objects.nonNull(node) && node == this.head) {
+      var next = node.getNext();
+      node.setNext(null);
+      if (Objects.nonNull(next)) {
+        next.setPrev(null);
+      }
+      this.head = next;
+    }else if (Objects.nonNull(node) && node == this.tail) {
+      var prev = node.getPrev();
+      node.setPrev(null);
+      prev.setNext(null);
+      this.tail = prev;
+    } else if(Objects.nonNull(node)) {
+      var next = node.getNext();
+      var prev = node.getPrev();
+      node.setNext(null);
+      node.setPrev(null);
+      prev.setNext(next);
+      next.setPrev(prev);
+    } else {
+      return false;
+    }
+    this.size--;
+    return true;
   }
 
   @Override
   public boolean containsAll(Collection<T> elements) {
-    return false;
+    if (Objects.isNull(elements) || elements.isEmpty()) {
+      return false;
+    }
+    var elementsSize = elements.size();
+
+    var count = elements.stream()
+      .filter(this::contains)
+      .count();
+
+    return count == elementsSize;
   }
 
   @Override
   public boolean contains(T data) {
+    if (Objects.isNull(data) || isEmpty()) {
+      return false;
+    }
+    var walker = this.head;
+    while (Objects.nonNull(walker)) {
+      if (walker.getItem() == data) {
+        return true;
+      }
+      walker = walker.getNext();
+    }
     return false;
   }
 
@@ -181,7 +264,7 @@ public class LinkedList<T> implements AbstractList<T> {
   @Override
   public void print(Direction direction) {
     Node<T> initialNode = null;
-    StringBuilder stringBuilder = new StringBuilder();
+    var stringBuilder = new StringBuilder();
     if (direction == Direction.HEAD2TAIL) {
       initialNode = this.head;
       stringBuilder.append("HEAD -> ");
@@ -216,4 +299,23 @@ public class LinkedList<T> implements AbstractList<T> {
     return this.size;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    LinkedList<?> that = (LinkedList<?>) o;
+
+    if (size != that.size) return false;
+    if (!Objects.equals(head, that.head)) return false;
+    return Objects.equals(tail, that.tail);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = head != null ? head.hashCode() : 0;
+    result = 31 * result + (tail != null ? tail.hashCode() : 0);
+    result = 31 * result + size;
+    return result;
+  }
 }
