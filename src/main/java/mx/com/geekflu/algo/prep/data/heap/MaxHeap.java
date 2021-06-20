@@ -1,76 +1,19 @@
 package mx.com.geekflu.algo.prep.data.heap;
 
-import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.data.core.ifc.AbstractHeap;
-import mx.com.geekflu.algo.prep.data.core.ifc.Minimal;
+import mx.com.geekflu.algo.prep.data.core.ifc.Maximum;
 
 @SuppressWarnings("ALL")
-@Slf4j
-public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements Minimal<E> {
+public class MaxHeap<E extends Comparable> extends AbstractHeap<E> implements Maximum<E> {
 
-  public MinHeap() {
+  public MaxHeap() {
     this.theHeap = (E[]) new Comparable[DEFAULT_SIZE];
     this.currentSizeLimit = DEFAULT_SIZE;
   }
 
-  public MinHeap(int initialSize) {
+  public MaxHeap(int initialSize) {
     this.theHeap = (E[]) new Comparable[initialSize];
     this.currentSizeLimit = initialSize;
-  }
-
-  @Override
-  public E getMin() {
-    if (isEmpty()) {
-      return null;
-    }
-    return this.theHeap[0];
-  }
-
-  @Override
-  public E extractMin() {
-
-    if (isEmpty()) {
-      return null;
-    }
-
-    //copy last to top
-    var i = 0;
-
-    if (this.size == 2 && this.theHeap[0].compareTo(this.theHeap[1]) > 0) {
-      swap(0, 1);
-    }
-
-    E top = this.theHeap[0];
-
-    if (this.size > 1) {
-      this.theHeap[0] = this.theHeap[size - 1];
-      this.theHeap[size - 1] = null;
-      this.size--;
-      //we start bubbling down
-      while (hasChildren(i)) {
-        if (this.size > 2) {
-          int left = getLeft(i);
-          int right = getRight(i);
-          //left
-          if (this.theHeap[left].compareTo(this.theHeap[right]) <= 0) {
-            if (this.theHeap[left].compareTo(this.theHeap[i]) <= 0) {
-              swap(left, i);
-              i = left;
-            } else {
-              break;
-            }
-          } else {
-            if (this.theHeap[right].compareTo(this.theHeap[i]) <= 0) {
-              swap(right, i);
-              i = right;
-            }else {
-              break;
-            }
-          }
-        }
-      }
-    }
-    return top;
   }
 
   @Override
@@ -86,7 +29,7 @@ public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements
     this.theHeap[size] = data;
     int i = this.size;
     int parent = parent(size);
-    while (i > 0 && this.theHeap[parent].compareTo(this.theHeap[i]) > 0) {
+    while (i > 0 && this.theHeap[parent].compareTo(this.theHeap[i]) < 0) {
       swap(parent,  i);
       i = parent;
       parent = parent(parent);
@@ -94,4 +37,57 @@ public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements
     this.size++;
   }
 
+  @Override
+  public E getMax() {
+    if (isEmpty()) {
+      return null;
+    }
+    return this.theHeap[0];
+  }
+
+  @Override
+  public E extractMax() {
+    if (isEmpty()) {
+      return null;
+    }
+
+    //copy last to top
+    var i = 0;
+
+    if (this.size == 2 && this.theHeap[0].compareTo(this.theHeap[1]) < 0) {
+      swap(0, 1);
+    }
+
+    E top = this.theHeap[0];
+
+    if (this.size > 1) {
+      this.theHeap[0] = this.theHeap[size - 1];
+      this.theHeap[size - 1] = null;
+      this.size--;
+      //we start bubbling down
+      while (hasChildren(i)) {
+        if (this.size > 2) {
+          int left = getLeft(i);
+          int right = getRight(i);
+          //left
+          if (this.theHeap[left].compareTo(this.theHeap[right]) >= 0) {
+            if (this.theHeap[left].compareTo(this.theHeap[i]) >= 0) {
+              swap(left, i);
+              i = left;
+            } else {
+              break;
+            }
+          } else {
+            if (this.theHeap[right].compareTo(this.theHeap[i]) >= 0) {
+              swap(right, i);
+              i = right;
+            }else {
+              break;
+            }
+          }
+        }
+      }
+    }
+    return top;
+  }
 }
