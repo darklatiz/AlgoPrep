@@ -20,6 +20,7 @@ public class ConstantAccelerationSketch extends PApplet {
     var location = new PVector((float) width / 2, (float) height / 2);
     var acceleration = new PVector(-0.001f, 0.01f);
     this.mover = new Mover(this, location, velocity, acceleration);
+    this.mover.setLimitSpeed(true);
   }
 
 
