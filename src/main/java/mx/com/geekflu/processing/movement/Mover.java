@@ -27,8 +27,8 @@ public class Mover implements Movable {
   public Mover(PApplet sketch) {
     this.sketch = sketch;
     this.location = new PVector(sketch.random(sketch.width), sketch.random(sketch.height));
-    this.acceleration = new PVector(0.0001f, 0.001f);
-    this.velocity = new PVector(sketch.random(0, 10), sketch.random(-2, 2));
+    this.acceleration = new PVector(-0.001f, 0.01f);
+    this.velocity = new PVector(sketch.random(-10, 10), sketch.random(-2, 2));
   }
 
 
