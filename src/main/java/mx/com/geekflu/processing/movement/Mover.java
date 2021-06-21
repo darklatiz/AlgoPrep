@@ -17,7 +17,7 @@ public class Mover implements Movable {
   private PVector acceleration;
   private PVector velocity;
 
-  public Mover(PApplet sketch, PVector location, PVector acceleration, PVector velocity) {
+  public Mover(PApplet sketch, PVector location, PVector velocity, PVector acceleration) {
     this.sketch = sketch;
     this.location = location;
     this.acceleration = acceleration;
@@ -28,14 +28,16 @@ public class Mover implements Movable {
     this.sketch = sketch;
     this.location = new PVector(sketch.random(sketch.width), sketch.random(sketch.height));
     this.acceleration = new PVector(0.0001f, 0.001f);
-    this.velocity = new PVector(sketch.random(-3, 3), sketch.random(-2, 2));
+    this.velocity = new PVector(sketch.random(0, 10), sketch.random(-2, 2));
   }
 
 
   @Override
   public void update() {
+    this.velocity.add(this.acceleration);
     this.location.add(this.velocity);
     this.sketch.text("Velocidad = " + this.velocity.mag(), 20, 50);
+    this.velocity.limit(15);
   }
 
   @Override
