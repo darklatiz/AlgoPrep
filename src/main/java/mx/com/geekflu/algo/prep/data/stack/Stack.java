@@ -47,6 +47,11 @@ public class Stack<T> implements Stackable<T> {
   }
 
   @Override
+  public int size() {
+    return this.stackContainer.size();
+  }
+
+  @Override
   public void print() {
     this.stackContainer.print(Direction.HEAD2TAIL);
   }

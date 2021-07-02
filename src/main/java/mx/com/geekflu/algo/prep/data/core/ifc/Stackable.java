@@ -6,4 +6,5 @@ public interface Stackable<T> extends Printable {
   T peek();
   void clear();
   boolean isEmpty();
+  int size();
 }
