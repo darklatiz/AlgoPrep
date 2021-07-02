@@ -10,12 +10,8 @@ public class Node<T> {
   private Node<T> next;
   private Node<T> prev;
   //this property will have and old value, min / max
-  private Node<T> oldValue;
-
+  private Node<T> theValue;
   public Node(T data){
     this.item = data;
   }
-
-
-
 }

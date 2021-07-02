@@ -24,7 +24,7 @@ public class MaxStack<T extends Comparable> implements Stackable<T>, Maximum<T>,
     if (isEmpty()) {
       return null;
     }
-    return this.top.getOldValue().getItem();
+    return this.top.getTheValue().getItem();
   }
 
   @Override
@@ -70,17 +70,16 @@ public class MaxStack<T extends Comparable> implements Stackable<T>, Maximum<T>,
     Node<T> current = new Node<>(data);
     if (Objects.isNull(this.top)){
       this.top = current;
-      this.top.setOldValue(this.top);
+      this.top.setTheValue(this.top);
     }else {
       current.setNext(this.top);
       this.top.setPrev(current);
 
-      if (data.compareTo(this.top.getOldValue().getItem()) > 0) {
-        current.setOldValue(current);
+      if (data.compareTo(this.top.getTheValue().getItem()) > 0) {
+        current.setTheValue(current);
       }else {
-        current.setOldValue(this.top.getOldValue());
+        current.setTheValue(this.top.getTheValue());
       }
-
       this.top = current;
     }
     this.size++;

@@ -2,17 +2,13 @@ package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.data.stack.MaxStack;
+import mx.com.geekflu.algo.prep.data.stack.MinStack;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Slf4j
-public class MaxStackTest {
+public class MaxMinStackTest {
 
   @Test
   public void tes_max_stack() {
@@ -38,6 +34,19 @@ public class MaxStackTest {
     Assert.assertNull(maxStack.pop());
 
 
+  }
+
+  @Test
+  public void test_min_stack() {
+    MinStack<Integer> minStack = new MinStack<>();
+    Assert.assertNotNull(minStack);
+    minStack.push(2);
+    minStack.push(22);
+    minStack.push(222);
+    minStack.push(222);
+    minStack.push(2222);
+    minStack.push(-2222);
+    Assert.assertEquals(Integer.valueOf(-2222), minStack.getMin());
   }
 
 }
