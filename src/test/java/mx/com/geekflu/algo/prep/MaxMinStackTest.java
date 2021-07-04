@@ -16,12 +16,12 @@ public class MaxMinStackTest {
     Assert.assertNotNull(maxStack);
     var size = 1000_000;
 
-    for (var i = 0; i < size; i++ ) {
+    for (var i = 0; i < size; i++) {
       int anInt = RandomUtils.nextInt(0, (int) (size * 1.4));
       maxStack.push(anInt);
     }
 
-    while (!maxStack.isEmpty()){
+    while (!maxStack.isEmpty()) {
       maxStack.pop();
       if (maxStack.size() <= 15) {
         log.info("The max = {}", maxStack.getMax());
@@ -39,14 +39,27 @@ public class MaxMinStackTest {
   @Test
   public void test_min_stack() {
     MinStack<Integer> minStack = new MinStack<>();
+    int size = 10_000_000;
     Assert.assertNotNull(minStack);
-    minStack.push(2);
-    minStack.push(22);
-    minStack.push(222);
-    minStack.push(222);
-    minStack.push(2222);
-    minStack.push(-2222);
-    Assert.assertEquals(Integer.valueOf(-2222), minStack.getMin());
+    minStack.print();
+
+    for (var i = 0; i < size; i++) {
+      int anInt = RandomUtils.nextInt(0, (int) (size * 1.4));
+      minStack.push(anInt);
+    }
+
+    while (!minStack.isEmpty()) {
+      minStack.pop();
+      if (minStack.size() <= 15) {
+        log.info("The min = {}", minStack.getMin());
+        minStack.print();
+        log.info("\n");
+      }
+    }
+
+    Assert.assertNull(minStack.getMin());
+    Assert.assertNull(minStack.pop());
+
   }
 
 }

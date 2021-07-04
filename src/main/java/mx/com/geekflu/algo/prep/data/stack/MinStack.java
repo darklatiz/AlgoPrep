@@ -7,6 +7,8 @@ import mx.com.geekflu.algo.prep.data.core.ifc.Minimal;
 import mx.com.geekflu.algo.prep.data.core.ifc.Printable;
 import mx.com.geekflu.algo.prep.data.core.ifc.Stackable;
 
+import java.util.Objects;
+
 @SuppressWarnings("ALL")
 @Slf4j
 @Getter
@@ -34,7 +36,18 @@ public class MinStack<T extends Comparable> implements Stackable<T>, Minimal<T>,
 
   @Override
   public void print() {
-
+    var stringBuilder = new StringBuilder();
+    if (isEmpty()) {
+      log.info("EMPTY");
+    }
+    stringBuilder.append("TOP -> ");
+    var current = this.top;
+    while (Objects.nonNull(current)) {
+      stringBuilder.append(current.getItem());
+      stringBuilder.append(" -> ");
+      current = current.getNext();
+    }
+    log.info(stringBuilder.toString());
   }
 
   @Override
