@@ -54,7 +54,7 @@ public class StackTest {
     Random random = new Random();
 
     log.info("Pushing Starting...");
-    for (var i = 0; i < 40_000_000 ; i++) {
+    for (var i = 0; i < 10_000_000 ; i++) {
       stack.push(random.nextInt());
     }
     log.info("Pushing Finished...");

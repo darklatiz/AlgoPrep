@@ -2,6 +2,8 @@ package mx.com.geekflu.algo.prep.data.core.ifc;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
+
 @Slf4j
 public abstract class AbstractHeap<E> {
 
@@ -9,6 +11,7 @@ public abstract class AbstractHeap<E> {
   public static final int DEFAULT_SIZE = 10;
   protected int size;
   protected int currentSizeLimit;
+  protected Comparator<E> comparator;
 
   protected boolean hasChildren(int i) {
     return getLeft(i) < size - 1 || getRight(i) < size - 1;
@@ -16,7 +19,7 @@ public abstract class AbstractHeap<E> {
 
   protected void ensureCapacity() {
     if (size >= currentSizeLimit) {
-      E[] nArray = (E[]) new Comparable[size + DEFAULT_SIZE];
+      E[] nArray = (E[]) new Object[size + DEFAULT_SIZE];
       System.arraycopy(this.theHeap, 0, nArray, 0, this.theHeap.length);
       this.theHeap = nArray;
     }

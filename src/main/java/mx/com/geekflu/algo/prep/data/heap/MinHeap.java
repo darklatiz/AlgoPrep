@@ -4,18 +4,22 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.data.core.ifc.AbstractHeap;
 import mx.com.geekflu.algo.prep.data.core.ifc.Minimal;
 
+import java.util.Comparator;
+
 @SuppressWarnings("ALL")
 @Slf4j
-public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements Minimal<E> {
+public class MinHeap<E> extends AbstractHeap<E> implements Minimal<E> {
 
-  public MinHeap() {
-    this.theHeap = (E[]) new Comparable[DEFAULT_SIZE];
+  public MinHeap(Comparator<E> comparator) {
+    this.theHeap = (E[]) new Object[DEFAULT_SIZE];
     this.currentSizeLimit = DEFAULT_SIZE;
+    this.comparator = comparator;
   }
 
-  public MinHeap(int initialSize) {
-    this.theHeap = (E[]) new Comparable[initialSize];
+  public MinHeap(int initialSize, Comparator<E> comparator) {
+    this.theHeap = (E[]) new Object[initialSize];
     this.currentSizeLimit = initialSize;
+    this.comparator = comparator;
   }
 
   @Override
@@ -36,7 +40,7 @@ public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements
     //copy last to top
     var i = 0;
 
-    if (this.size == 2 && this.theHeap[0].compareTo(this.theHeap[1]) > 0) {
+    if (this.size == 2 && this.comparator.compare(this.theHeap[0], this.theHeap[1]) > 0) {
       swap(0, 1);
     }
 
@@ -52,15 +56,15 @@ public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements
           int left = getLeft(i);
           int right = getRight(i);
           //left
-          if (this.theHeap[left].compareTo(this.theHeap[right]) <= 0) {
-            if (this.theHeap[left].compareTo(this.theHeap[i]) <= 0) {
+          if (this.comparator.compare(this.theHeap[left], this.theHeap[right]) <= 0) {
+            if (this.comparator.compare(this.theHeap[left], this.theHeap[i]) <= 0) {
               swap(left, i);
               i = left;
             } else {
               break;
             }
           } else {
-            if (this.theHeap[right].compareTo(this.theHeap[i]) <= 0) {
+            if (this.comparator.compare(this.theHeap[right], this.theHeap[i]) <= 0) {
               swap(right, i);
               i = right;
             }else {
@@ -86,7 +90,7 @@ public class MinHeap<E extends Comparable<E>> extends AbstractHeap<E> implements
     this.theHeap[size] = data;
     int i = this.size;
     int parent = parent(size);
-    while (i > 0 && this.theHeap[parent].compareTo(this.theHeap[i]) > 0) {
+    while (i > 0 && this.comparator.compare(this.theHeap[parent], this.theHeap[i]) > 0) {
       swap(parent,  i);
       i = parent;
       parent = parent(parent);

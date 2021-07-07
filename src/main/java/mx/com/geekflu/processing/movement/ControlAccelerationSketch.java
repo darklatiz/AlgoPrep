@@ -17,7 +17,7 @@ public class ControlAccelerationSketch extends PApplet {
     size(640, 360);
     var velocity = new PVector(0.1f, 0.1f);
     var location = new PVector((float) width / 2, (float) height / 2);
-    var acceleration = new PVector(-0.0001f, 0.001f);
+    var acceleration = new PVector(0.001f, 0.001f);
     this.mover = new Mover(this, location, velocity, acceleration);
   }
 
@@ -39,7 +39,7 @@ public class ControlAccelerationSketch extends PApplet {
       getMover().getAcceleration().setMag(currentMag);
     }else if (event.getKeyCode() == DOWN) {
       log.info("Key  DOWN pressed");
-      currentMag -= 0.001;
+      currentMag -= 0.5;
       getMover().getAcceleration().setMag(currentMag);
     }
   }

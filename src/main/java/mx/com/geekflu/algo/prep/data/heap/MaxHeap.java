@@ -3,17 +3,21 @@ package mx.com.geekflu.algo.prep.data.heap;
 import mx.com.geekflu.algo.prep.data.core.ifc.AbstractHeap;
 import mx.com.geekflu.algo.prep.data.core.ifc.Maximum;
 
-@SuppressWarnings("ALL")
-public class MaxHeap<E extends Comparable> extends AbstractHeap<E> implements Maximum<E> {
+import java.util.Comparator;
 
-  public MaxHeap() {
-    this.theHeap = (E[]) new Comparable[DEFAULT_SIZE];
+@SuppressWarnings("ALL")
+public class MaxHeap<E> extends AbstractHeap<E> implements Maximum<E> {
+
+  public MaxHeap(Comparator<E> comparator) {
+    this.theHeap = (E[]) new Object[DEFAULT_SIZE];
     this.currentSizeLimit = DEFAULT_SIZE;
+    this.comparator = comparator;
   }
 
-  public MaxHeap(int initialSize) {
-    this.theHeap = (E[]) new Comparable[initialSize];
+  public MaxHeap(int initialSize, Comparator<E> comparator) {
+    this.theHeap = (E[]) new Object[initialSize];
     this.currentSizeLimit = initialSize;
+    this.comparator = comparator;
   }
 
   @Override
@@ -29,7 +33,7 @@ public class MaxHeap<E extends Comparable> extends AbstractHeap<E> implements Ma
     this.theHeap[size] = data;
     int i = this.size;
     int parent = parent(size);
-    while (i > 0 && this.theHeap[parent].compareTo(this.theHeap[i]) < 0) {
+    while (i > 0 && this.comparator.compare(this.theHeap[parent], this.theHeap[i]) < 0) {
       swap(parent,  i);
       i = parent;
       parent = parent(parent);
@@ -54,7 +58,7 @@ public class MaxHeap<E extends Comparable> extends AbstractHeap<E> implements Ma
     //copy last to top
     var i = 0;
 
-    if (this.size == 2 && this.theHeap[0].compareTo(this.theHeap[1]) < 0) {
+    if (this.size == 2 && this.comparator.compare(this.theHeap[0], this.theHeap[1]) < 0) {
       swap(0, 1);
     }
 
@@ -70,15 +74,15 @@ public class MaxHeap<E extends Comparable> extends AbstractHeap<E> implements Ma
           int left = getLeft(i);
           int right = getRight(i);
           //left
-          if (this.theHeap[left].compareTo(this.theHeap[right]) >= 0) {
-            if (this.theHeap[left].compareTo(this.theHeap[i]) >= 0) {
+          if (this.comparator.compare(this.theHeap[left], this.theHeap[right]) >= 0) {
+            if (this.comparator.compare(this.theHeap[left], this.theHeap[i]) >= 0) {
               swap(left, i);
               i = left;
             } else {
               break;
             }
           } else {
-            if (this.theHeap[right].compareTo(this.theHeap[i]) >= 0) {
+            if (this.comparator.compare(this.theHeap[right], this.theHeap[i]) >= 0) {
               swap(right, i);
               i = right;
             }else {

@@ -22,7 +22,7 @@ public class HeapTest {
 
   @Test
   public void test_min_heap_creation() {
-    MinHeap<Integer> minHeap = new MinHeap<>();
+    MinHeap<Integer> minHeap = new MinHeap<>(Integer::compareTo);
     Assert.assertNotNull(minHeap);
     Assert.assertTrue(minHeap.isEmpty());
     Assert.assertNull(minHeap.getMin());
@@ -30,7 +30,7 @@ public class HeapTest {
 
   @Test
   public void test_max_heap_creation() {
-    MaxHeap<Float> maxHeap = new MaxHeap<>();
+    MaxHeap<Float> maxHeap = new MaxHeap<>(Float::compareTo);
     Assert.assertNotNull(maxHeap);
     Assert.assertTrue(maxHeap.isEmpty());
     Assert.assertNull(maxHeap.getMax());
@@ -39,7 +39,7 @@ public class HeapTest {
   @Test
   public void test_min_heap_insertion_integer() {
     int initialSize = 100_000;
-    MinHeap<Integer> minHeap = new MinHeap<>(initialSize);
+    MinHeap<Integer> minHeap = new MinHeap<>(initialSize, Integer::compareTo);
     List<Integer> integerList = new ArrayList<>();
     Assert.assertNotNull(minHeap);
 
@@ -70,7 +70,7 @@ public class HeapTest {
   @Test
   public void test_max_heap_insertion_integer() {
     int initialSize = 100_000;
-    MaxHeap<Integer> maxHeap = new MaxHeap<>(initialSize);
+    MaxHeap<Integer> maxHeap = new MaxHeap<>(initialSize, Integer::compareTo);
     List<Integer> integerList = new ArrayList<>();
     Assert.assertNotNull(maxHeap);
 
@@ -103,7 +103,8 @@ public class HeapTest {
   @Test
   public void test_min_heap_insert_complex_object() {
     int initialSize = 150_000;
-    MinHeap<Item> minHeap = new MinHeap<>(initialSize);
+    Comparator<Item> itemComparator = Comparator.comparing(Item::getPrice);
+    MinHeap<Item> minHeap = new MinHeap<>(initialSize, itemComparator);
     List<Item> itemList = new ArrayList<>();
     Assert.assertNotNull(minHeap);
 
@@ -129,14 +130,12 @@ public class HeapTest {
     itemList.add(irwmMinusOne);
 
     log.info("Finished insertion in Heap");
-    List<Item> orderedList = itemList.stream()
-      .sorted()
-      .collect(Collectors.toList());
+    itemList.sort(itemComparator);
 
     Assert.assertEquals(minHeap.getMin(), irwmMinusOne);
 
     for (Item item :
-      orderedList) {
+      itemList) {
       Item fromHeap = minHeap.extractMin();
       Assert.assertEquals(item.getPrice(), fromHeap.getPrice());
     }
@@ -147,7 +146,8 @@ public class HeapTest {
   @Test
   public void test_max_heap_insert_complex_object() {
     int initialSize = 150_000;
-    MaxHeap<Item> maxHeap = new MaxHeap<>(initialSize);
+    Comparator<Item> comparator = Comparator.comparing(Item::getPrice);
+    MaxHeap<Item> maxHeap = new MaxHeap<>(initialSize, comparator);
     List<Item> itemList = new ArrayList<>();
     Assert.assertNotNull(maxHeap);
 
@@ -173,14 +173,12 @@ public class HeapTest {
     itemList.add(irwmPlusOne);
 
     log.info("Finished insertion in Heap");
-    List<Item> orderedList = itemList.stream()
-      .sorted(Comparator.reverseOrder())
-      .collect(Collectors.toList());
+    itemList.sort(comparator.reversed());
 
     Assert.assertEquals(maxHeap.getMax(), irwmPlusOne);
 
     for (Item item :
-      orderedList) {
+      itemList) {
       Item fromHeap = maxHeap.extractMax();
       Assert.assertEquals(item.getPrice(), fromHeap.getPrice());
     }
@@ -193,15 +191,10 @@ public class HeapTest {
 @Getter
 @Builder
 @ToString
-class Item implements Comparable<Item> {
+class Item {
   private Integer qty;
   private String description;
   private Float price;
-
-  @Override
-  public int compareTo(Item other) {
-    return this.price.compareTo(other.getPrice());
-  }
 
   @Override
   public boolean equals(Object o) {
