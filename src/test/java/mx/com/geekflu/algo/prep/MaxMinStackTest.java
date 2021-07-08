@@ -12,7 +12,7 @@ public class MaxMinStackTest {
 
   @Test
   public void tes_max_stack() {
-    MaxStack<Integer> maxStack = new MaxStack<>();
+    MaxStack<Integer> maxStack = new MaxStack<>(Integer::compareTo);
     Assert.assertNotNull(maxStack);
     var size = 1000_000;
 
@@ -38,7 +38,7 @@ public class MaxMinStackTest {
 
   @Test
   public void test_min_stack() {
-    MinStack<Integer> minStack = new MinStack<>();
+    MinStack<Integer> minStack = new MinStack<>(Integer::compareTo);
     int size = 10_000_000;
     Assert.assertNotNull(minStack);
     minStack.print();

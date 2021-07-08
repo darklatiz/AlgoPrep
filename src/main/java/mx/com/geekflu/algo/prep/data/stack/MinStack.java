@@ -7,18 +7,21 @@ import mx.com.geekflu.algo.prep.data.core.ifc.Minimal;
 import mx.com.geekflu.algo.prep.data.core.ifc.Printable;
 import mx.com.geekflu.algo.prep.data.core.ifc.Stackable;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
 @Slf4j
 @Getter
-public class MinStack<T extends Comparable> implements Stackable<T>, Minimal<T>, Printable {
+public class MinStack<T> implements Stackable<T>, Minimal<T>, Printable {
 
   private Node<T> top;
   private int size;
+  private Comparator<T> comparator;
 
 
-  public MinStack() {
+  public MinStack(Comparator<T> comparator) {
+    this.comparator = comparator;
     this.size = 0;
   }
 
@@ -76,7 +79,7 @@ public class MinStack<T extends Comparable> implements Stackable<T>, Minimal<T>,
       newNode.setNext(this.top);
       this.top.setPrev(newNode);
 
-      if (data.compareTo(this.top.getTheValue().getItem()) < 0) {
+      if (this.comparator.compare(data, this.top.getTheValue().getItem()) < 0) {
         newNode.setTheValue(newNode);
       } else {
         newNode.setTheValue(this.top.getTheValue());

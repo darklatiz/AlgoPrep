@@ -6,17 +6,20 @@ import mx.com.geekflu.algo.prep.data.core.ifc.Maximum;
 import mx.com.geekflu.algo.prep.data.core.ifc.Printable;
 import mx.com.geekflu.algo.prep.data.core.ifc.Stackable;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 @SuppressWarnings("ALL")
 @Slf4j
-public class MaxStack<T extends Comparable> implements Stackable<T>, Maximum<T>, Printable {
+public class MaxStack<T> implements Stackable<T>, Maximum<T>, Printable {
 
   private Node<T> top;
   private int size;
+  private Comparator<T> comparator;
 
-  public MaxStack() {
+  public MaxStack(Comparator<T> comparator) {
     this.size = 0;
+    this.comparator = comparator;
   }
 
   @Override
@@ -75,7 +78,7 @@ public class MaxStack<T extends Comparable> implements Stackable<T>, Maximum<T>,
       current.setNext(this.top);
       this.top.setPrev(current);
 
-      if (data.compareTo(this.top.getTheValue().getItem()) > 0) {
+      if (this.comparator.compare(data, this.top.getTheValue().getItem()) > 0) {
         current.setTheValue(current);
       }else {
         current.setTheValue(this.top.getTheValue());
