@@ -52,4 +52,8 @@ public abstract class AbstractHeap<E> {
 
   public abstract void insert(E data);
 
+  public void updateComparator(Comparator<E> newComparator) {
+    this.comparator = newComparator;
+  }
+
 }

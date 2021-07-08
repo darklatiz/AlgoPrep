@@ -102,7 +102,7 @@ public class HeapTest {
 
   @Test
   public void test_min_heap_insert_complex_object() {
-    int initialSize = 150_000;
+    int initialSize = 1_500_000;
     Comparator<Item> itemComparator = Comparator.comparing(Item::getPrice);
     MinHeap<Item> minHeap = new MinHeap<>(initialSize, itemComparator);
     List<Item> itemList = new ArrayList<>();
@@ -144,29 +144,22 @@ public class HeapTest {
   }
 
   @Test
-  public void test_max_heap_insert_complex_object() {
+  public void test_max_heap_insert_complex_object_by_price() {
     int initialSize = 150_000;
     Comparator<Item> comparator = Comparator.comparing(Item::getPrice);
     MaxHeap<Item> maxHeap = new MaxHeap<>(initialSize, comparator);
-    List<Item> itemList = new ArrayList<>();
+    List<Item> itemList = createItemList(initialSize, -1);
     Assert.assertNotNull(maxHeap);
 
-    for (var i = 0; i < initialSize; i++) {
-      Item item = Item.builder()
-        .description(RandomStringUtils.randomAlphabetic(10))
-        .price(-1 * RandomUtils.nextFloat(0, 5000))
-        .qty(RandomUtils.nextInt(1, 100))
-        .build();
-
-      itemList.add(item);
+    for (Item item : itemList) {
       maxHeap.insert(item);
-
     }
+
 
     Item irwmPlusOne = Item.builder()
       .description(RandomStringUtils.randomAlphabetic(10))
       .price(1.0f)
-      .qty(1)
+      .qty(10001)
       .build();
     maxHeap.insert(irwmPlusOne);
 
@@ -182,6 +175,86 @@ public class HeapTest {
       Item fromHeap = maxHeap.extractMax();
       Assert.assertEquals(item.getPrice(), fromHeap.getPrice());
     }
+
+    maxHeap.updateComparator(Comparator.comparing(Item::getQty));
+    itemList = createItemList(initialSize, -1);
+    for (Item item : itemList) {
+      maxHeap.insert(item);
+    }
+  }
+
+  @Test
+  public void test_max_heap_insert_complex_object_by_qty() {
+    int initialSize = 150_000;
+    Comparator<Item> comparator = Comparator.comparing(Item::getQty);
+    MaxHeap<Item> maxHeap = new MaxHeap<>(initialSize, comparator);
+    List<Item> itemList = createItemList(initialSize, -1);
+    Assert.assertNotNull(maxHeap);
+
+    for (Item item : itemList) {
+      maxHeap.insert(item);
+    }
+
+    Item irwmPlusOne = Item.builder()
+      .description(RandomStringUtils.randomAlphabetic(10))
+      .price(1.0f)
+      .qty(10001)
+      .build();
+    maxHeap.insert(irwmPlusOne);
+    itemList.add(irwmPlusOne);
+
+    log.info("Finished insertion in Heap");
+    itemList.sort(comparator.reversed());
+    Assert.assertEquals(maxHeap.getMax(), irwmPlusOne);
+
+    for (Item item :
+      itemList) {
+      Item fromHeap = maxHeap.extractMax();
+      Assert.assertEquals(item.getQty(), fromHeap.getQty());
+    }
+  }
+
+  @Test
+  public void test_max_heap_insert_complex_object_by_description() {
+    int initialSize = 100_000;
+    Comparator<Item> comparator = Comparator.comparing(Item::getDescription);
+    MaxHeap<Item> maxHeap = new MaxHeap<>(initialSize, comparator);
+    List<Item> itemList = createItemList(initialSize, -1);
+    Assert.assertNotNull(maxHeap);
+
+    for (Item item : itemList) {
+      maxHeap.insert(item);
+    }
+
+    Item irwmPlusOne = Item.builder()
+      .description("zzzzzzzzzz")
+      .price(1.0f)
+      .qty(10001)
+      .build();
+    maxHeap.insert(irwmPlusOne);
+    itemList.add(irwmPlusOne);
+
+    log.info("Finished insertion in Heap");
+    itemList.sort(comparator.reversed());
+    Assert.assertEquals(maxHeap.getMax(), irwmPlusOne);
+
+    for (Item item : itemList) {
+      Item fromHeap = maxHeap.extractMax();
+      Assert.assertEquals(item.getDescription(), fromHeap.getDescription());
+    }
+  }
+
+  public List<Item> createItemList(int numItems, int factor) {
+    List<Item> itemList = new ArrayList<>();
+    for (var i = 0; i < numItems; i++) {
+      Item item = Item.builder()
+        .description(RandomStringUtils.randomAlphabetic(10))
+        .price(factor * RandomUtils.nextFloat(0, 5000))
+        .qty(RandomUtils.nextInt(1, 10000))
+        .build();
+      itemList.add(item);
+    }
+    return itemList;
   }
 
 
