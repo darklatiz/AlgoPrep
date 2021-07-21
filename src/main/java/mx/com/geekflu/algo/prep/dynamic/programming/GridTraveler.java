@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class GridTraveler {
 
-  private static Map<String, Long> memo;
-
   private GridTraveler() {}
 
   public static long brute(int row, int col) {
@@ -23,17 +21,16 @@ public class GridTraveler {
 
   }
 
-  public static long memoized(int rows, int cols) {
+  public static long memoized(int rows, int cols, Map<String, Long> memo) {
     if (Objects.isNull(memo)) {
       memo = new HashMap<>();
     }
-
     String key = rows + "," + cols;
     if (memo.containsKey(key)) return memo.get(key);
     if (rows == 1 && cols == 1) return 1;
     if (rows == 0 || cols == 0) return 0;
 
-    long result = memoized(rows - 1, cols) + memoized(rows, cols - 1);
+    long result = memoized(rows - 1, cols, memo) + memoized(rows, cols - 1, memo);
     memo.put(key, result);
     return result;
   }
