@@ -9,9 +9,15 @@ import java.util.Objects;
 @Slf4j
 public class Fibonacci {
 
+  private Fibonacci() {}
+
   private static Map<Long, Long> memo;
 
   public static int brute(long number) {
+    if (number < 0) {
+      throw new RuntimeException("Number cannot be less than 0");
+    }
+
     if (number == 0) {
       return 0;
     }
@@ -20,10 +26,14 @@ public class Fibonacci {
       return 1;
     }
 
-    return brute(number -1 ) + brute(number - 2);
+    return brute(number - 1) + brute(number - 2);
   }
 
   public static long memoization(long number) {
+    if (number < 0) {
+      throw new RuntimeException("Number cannot be less than 0");
+    }
+
     if (Objects.isNull(memo)) {
       memo = new HashMap<>();
     }
@@ -42,7 +52,6 @@ public class Fibonacci {
 
     long result = memoization(number - 1) + memoization(number - 2);
     memo.put(number, result);
-
     return result;
 
   }
