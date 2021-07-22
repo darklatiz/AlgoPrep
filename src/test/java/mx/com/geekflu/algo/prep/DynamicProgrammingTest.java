@@ -1,6 +1,7 @@
 package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.com.geekflu.algo.prep.dynamic.programming.BestSum;
 import mx.com.geekflu.algo.prep.dynamic.programming.CanSum;
 import mx.com.geekflu.algo.prep.dynamic.programming.Fibonacci;
 import mx.com.geekflu.algo.prep.dynamic.programming.GridTraveler;
@@ -80,6 +81,38 @@ public class DynamicProgrammingTest {
 
     Assert.assertNull(HowToSum.memoized(300, List.of(7, 14)));
 
+  }
+
+  @Test
+  public void test_how_to_best_sum() {
+    List<Integer> res = BestSum.brute(7, List.of(5, 3, 4, 7));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
+    Assert.assertEquals(1, res.size());
+    Assert.assertEquals(7, res.get(0).intValue());
+
+
+    res = BestSum.brute(8, List.of(2, 3, 5));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
+    Assert.assertEquals(2, res.size());
+    Assert.assertTrue(res.contains(3));
+    Assert.assertTrue(res.contains(5));
+
+    res = BestSum.brute(8, List.of(1, 4, 5));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
+    Assert.assertEquals(2, res.size());
+    Assert.assertEquals(2, res.stream().filter(integer -> integer == 4).count());
+  }
+
+  @Test
+  public void test_how_to_sum() {
+    List<Integer> res = BestSum.memoized(100, List.of(1, 2, 5, 25));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
+    Assert.assertEquals(4, res.size());
+    Assert.assertEquals(4, res.stream().filter(integer -> integer == 25).count());
   }
 
 }
