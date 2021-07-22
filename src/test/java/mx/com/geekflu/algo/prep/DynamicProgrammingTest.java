@@ -8,7 +8,6 @@ import mx.com.geekflu.algo.prep.dynamic.programming.HowToSum;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -44,8 +43,7 @@ public class DynamicProgrammingTest {
 
   @Test
   public void test_grid_traveler_memoized() {
-    var memo = new HashMap<String, Long>();
-    Assert.assertEquals(2333606220L, GridTraveler.memoized(18, 18, memo));
+    Assert.assertEquals(2333606220L, GridTraveler.memoized(18, 18));
 
   }
 
@@ -79,6 +77,8 @@ public class DynamicProgrammingTest {
   public void tes_how_to_sum_memoized() {
 //    log.info("Res = {}", HowToSum.brute(300, List.of(7, 14))); // 6 seg
     log.info("Res = {}", HowToSum.memoized(300, List.of(7, 14)));
+
+    Assert.assertNull(HowToSum.memoized(300, List.of(7, 14)));
 
   }
 

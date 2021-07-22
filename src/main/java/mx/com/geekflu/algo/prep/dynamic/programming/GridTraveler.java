@@ -21,7 +21,7 @@ public class GridTraveler {
 
   }
 
-  public static long memoized(int rows, int cols, Map<String, Long> memo) {
+  private static long memoized(int rows, int cols, Map<String, Long> memo) {
     if (Objects.isNull(memo)) {
       memo = new HashMap<>();
     }
@@ -33,6 +33,10 @@ public class GridTraveler {
     long result = memoized(rows - 1, cols, memo) + memoized(rows, cols - 1, memo);
     memo.put(key, result);
     return result;
+  }
+
+  public static long memoized(int rows, int cols) {
+    return memoized(rows, cols, new HashMap<>());
   }
 
 }
