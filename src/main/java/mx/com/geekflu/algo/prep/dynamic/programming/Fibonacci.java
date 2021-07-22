@@ -27,7 +27,7 @@ public class Fibonacci {
     return brute(number - 1) + brute(number - 2);
   }
 
-  public static long memoization(long number, Map<Long, Long> memo) {
+  private static long memoization(long number, Map<Long, Long> memo) {
     if (number < 0) {
       throw new RuntimeException("Number cannot be less than 0");
     }
@@ -52,6 +52,10 @@ public class Fibonacci {
     memo.put(number, result);
     return result;
 
+  }
+
+  public static long memoization(long number) {
+    return memoization(number, new HashMap<>());
   }
 
 }

@@ -22,7 +22,7 @@ public class CanSum {
     return false;
   }
 
-  public static boolean memoized(long sum, int[] nums, Map<Long, Boolean> memo) {
+  private static boolean memoized(long sum, int[] nums, Map<Long, Boolean> memo) {
     if (Objects.isNull(memo)) {
       memo = new HashMap<>();
     }
@@ -40,5 +40,9 @@ public class CanSum {
     }
     memo.put(sum, false);
     return false;
+  }
+
+  public static boolean memoized(long sum, int[] nums) {
+    return memoized(sum, nums, new HashMap<>());
   }
 }
