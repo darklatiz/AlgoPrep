@@ -29,34 +29,34 @@ public class BestSum {
     return shortestCombination;
   }
 
-  private static List<Integer> memoized(int targetSum, List<Integer> numbers, Map<Integer, List<Integer>> memo) {
+  private static String memoized(int targetSum, List<Integer> numbers, Map<Integer, String> memo) {
     if (Objects.isNull(memo)) {
       memo = new HashMap<>();
     }
-    if (memo.containsKey(targetSum)) return new ArrayList<>(memo.get(targetSum));
-    if (targetSum == 0) return new ArrayList<>();
+    if (memo.containsKey(targetSum)) return memo.get(targetSum);
+    if (targetSum == 0) return "";
     if (targetSum < 0) return null;
 
-    List<Integer> shortestCombination = null;
+    String shortestCombination = null;
 
     for (var num : numbers) {
       int remainder = targetSum - num;
-      List<Integer> remainderResult = memoized(remainder, numbers, memo);
+      String remainderResult = memoized(remainder, numbers, memo);
       if (Objects.nonNull(remainderResult)) {
-        remainderResult.add(num);
-        if (Objects.isNull(shortestCombination) || remainderResult.size() < shortestCombination.size()) {
-          shortestCombination = new ArrayList<>(remainderResult);
+        remainderResult += "," + num;
+        if (Objects.isNull(shortestCombination) || remainderResult.length() < shortestCombination.length()) {
+          shortestCombination = remainderResult;
         }
       }
     }
-    memo.put(targetSum, new ArrayList<>(shortestCombination));
+    memo.put(targetSum, shortestCombination);
     return memo.get(targetSum);
 
   }
 
-  public static List<Integer> memoized(int targetSum, List<Integer> numbers) {
-    Map<Integer, List<Integer>> memo = new HashMap<>();
-    List<Integer> result = memoized(targetSum, numbers, memo);
+  public static String memoized(int targetSum, List<Integer> numbers) {
+    Map<Integer, String> memo = new HashMap<>();
+    String result = memoized(targetSum, numbers, memo);
     return result;
   }
 }

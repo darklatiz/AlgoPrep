@@ -108,11 +108,21 @@ public class DynamicProgrammingTest {
 
   @Test
   public void test_how_to_sum() {
-    List<Integer> res = BestSum.memoized(100, List.of(1, 2, 5, 25));
+    String res = BestSum.memoized(7, List.of(5, 3, 4, 7));
     log.info("BestSum = {}", res);
     Assert.assertNotNull(res);
-    Assert.assertEquals(4, res.size());
-    Assert.assertEquals(4, res.stream().filter(integer -> integer == 25).count());
+    Assert.assertEquals(1, res.length());
+    Assert.assertTrue(res.contains("7"));
+
+
+    res = BestSum.memoized(8, List.of(2, 3, 5));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
+    Assert.assertEquals(2, res.length());
+
+    res = BestSum.memoized(100, List.of(1, 2, 5, 25));
+    log.info("BestSum = {}", res);
+    Assert.assertNotNull(res);
   }
 
 }
