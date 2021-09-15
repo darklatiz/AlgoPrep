@@ -37,6 +37,7 @@ public class DisjointSet {
     long data;
     Node parent;
     int rank;
+
   }
 
   public void makeSet(long data) {
