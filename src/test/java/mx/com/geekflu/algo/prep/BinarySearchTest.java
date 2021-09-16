@@ -36,4 +36,16 @@ public class BinarySearchTest {
     Assert.assertEquals(15, BinarySearch.binarySearch(array, 44));
   }
 
+  @Test
+  public void test_ceil() {
+    Integer[] array = new Integer[]{2, 3, 5, 9, 14, 16, 18};
+    Assert.assertEquals(5, BinarySearch.ceil(array, 15));
+  }
+
+  @Test
+  public void test_floor() {
+    Integer[] array = new Integer[]{2, 3, 5, 9, 14, 16, 18};
+    Assert.assertEquals(4, BinarySearch.floor(array, 15));
+  }
+
 }

@@ -24,3 +24,36 @@ mid = arr[midIndex]
    1. if target > middle value we search in the right
    2. else search in the left part
    3. if middle value == target we finish.
+
+## Problem Ceiling of a number
+
+- Ceiling find the smallest value in the array greater or equal to the target
+```javascript
+arr = [2, 3, 5, 9, 14, 16, 18]
+ceiling(arr, target = 14) == 14
+ceiling(arr, target = 15) == 16
+ceiling(arr, target = 4) == 5
+```
+- In the case ceiling(arr, target = 15) == 16
+  - 15 is not present in the array, so we take all the elements >= 15 [16, 18]
+  - we take the smallest which is 16
+- In the case ceiling(arr, target = 4) == 5
+   - 4 is not present in the array, so we take all the elements >= 4 **[5, 9, 14, 16, 18]**
+   - we take the smallest which is **5**
+- The key point is when target is not found we return the updated value of start
+
+## Problem Floor of a number in an Array
+- Ceiling find the greatest value in the array small or equal to the target
+```javascript
+arr = [2, 3, 5, 9, 14, 16, 18]
+floor(arr, target = 14) == 14
+floor(arr, target = 4) == 3
+```
+- In the case floor(arr, target = 15) == 14
+   - 15 is not present in the array, so we take all the elements <= 15 [2, 3, 5, 9, **14**]
+   - we take the greatest which is 14
+- In the case floor(arr, target = 4) == 3
+   - 4 is not present in the array, so we take all the elements <= 4 [2, **3**]
+   - we take the smallest which is **3**
+- The key point is when target is not found we return the updated value of end
+
