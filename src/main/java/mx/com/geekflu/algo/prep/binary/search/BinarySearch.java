@@ -69,8 +69,6 @@ public class BinarySearch {
 
 
     while (start <= end) {
-      // this way may overflow int values
-//      int midIndex = (end + start) / 2;
       int midIndex = start + (end - start) / 2;
       int midPointValue = arr[midIndex];
 

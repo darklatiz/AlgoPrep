@@ -2,6 +2,7 @@ package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.binary.search.BinarySearch;
+import mx.com.geekflu.algo.prep.binary.search.FindSmallestLetter;
 import mx.com.geekflu.algo.prep.util.Util;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,6 +47,16 @@ public class BinarySearchTest {
   public void test_floor() {
     Integer[] array = new Integer[]{2, 3, 5, 9, 14, 16, 18};
     Assert.assertEquals(4, BinarySearch.floor(array, 15));
+  }
+
+  @Test
+  public void test_smallest_letters() {
+    char[] chars = new char[]{'c', 'f', 'j'};
+    Assert.assertEquals('c', FindSmallestLetter.findSmallestLetter(chars, 'a'));
+    Assert.assertEquals('f', FindSmallestLetter.findSmallestLetter(chars, 'c'));
+    Assert.assertEquals('f', FindSmallestLetter.findSmallestLetter(chars, 'd'));
+    Assert.assertEquals('j', FindSmallestLetter.findSmallestLetter(chars, 'g'));
+    Assert.assertEquals('c', FindSmallestLetter.findSmallestLetter(chars, 'j'));
   }
 
 }
