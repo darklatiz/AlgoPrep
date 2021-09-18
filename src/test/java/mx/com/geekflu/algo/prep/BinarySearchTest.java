@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.binary.search.BinarySearch;
 import mx.com.geekflu.algo.prep.binary.search.FindSmallestLetter;
 import mx.com.geekflu.algo.prep.binary.search.FirstBadVersion;
+import mx.com.geekflu.algo.prep.binary.search.PeakIndexInAMountain;
 import mx.com.geekflu.algo.prep.binary.search.SearchInsertPosition;
 import mx.com.geekflu.algo.prep.util.Util;
 import org.junit.Assert;
@@ -80,6 +81,28 @@ public class BinarySearchTest {
 
     f.changeBadVersion();
     Assert.assertEquals(f.getCurrentBadVersion(), f.firstBadVersion(n));
+  }
+
+  @Test
+  public void test_find_peak_in_array() {
+    int[] nums = {3,5,3,2,0};
+    Assert.assertEquals(1, PeakIndexInAMountain.peakIndexInMountainArray(nums));
+
+    int[] nums1 = {0,1,0};
+    Assert.assertEquals(1, PeakIndexInAMountain.peakIndexInMountainArray(nums1));
+
+    int[] nums2 = {0,2,1,0};
+    Assert.assertEquals(1, PeakIndexInAMountain.peakIndexInMountainArray(nums2));
+
+    int[] nums3 = {0,10,5,2};
+    Assert.assertEquals(1, PeakIndexInAMountain.peakIndexInMountainArray(nums3));
+
+    int[] nums4 = {3,4,5,1};
+    Assert.assertEquals(2, PeakIndexInAMountain.peakIndexInMountainArray(nums4));
+
+    int[] nums5 = {24,69,100,99,79,78,67,36,26,19};
+    Assert.assertEquals(2, PeakIndexInAMountain.peakIndexInMountainArray(nums5));
+
   }
 
 }
