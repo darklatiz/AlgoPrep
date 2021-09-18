@@ -25,4 +25,8 @@ public class Util {
     return arr;
   }
 
+  public static int getRandomInt(int bound) {
+    return Util.random.nextInt(bound);
+  }
+
 }

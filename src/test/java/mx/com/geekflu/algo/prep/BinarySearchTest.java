@@ -3,6 +3,7 @@ package mx.com.geekflu.algo.prep;
 import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.binary.search.BinarySearch;
 import mx.com.geekflu.algo.prep.binary.search.FindSmallestLetter;
+import mx.com.geekflu.algo.prep.binary.search.FirstBadVersion;
 import mx.com.geekflu.algo.prep.binary.search.SearchInsertPosition;
 import mx.com.geekflu.algo.prep.util.Util;
 import org.junit.Assert;
@@ -68,6 +69,17 @@ public class BinarySearchTest {
     Assert.assertEquals(4, SearchInsertPosition.searchInsert(nums, 7));
     Assert.assertEquals(0, SearchInsertPosition.searchInsert(nums, 0));
     Assert.assertEquals(0, SearchInsertPosition.searchInsert(nums, 0));
+  }
+
+  @Test
+  public void test_first_bad_version() {
+    int n = 10000;
+    var f = new FirstBadVersion(n);
+    var currentBadVersion = f.getCurrentBadVersion();
+    Assert.assertEquals(currentBadVersion, f.firstBadVersion(n));
+
+    f.changeBadVersion();
+    Assert.assertEquals(f.getCurrentBadVersion(), f.firstBadVersion(n));
   }
 
 }
