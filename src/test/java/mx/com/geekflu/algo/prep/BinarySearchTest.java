@@ -2,6 +2,7 @@ package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.binary.search.BinarySearch;
+import mx.com.geekflu.algo.prep.binary.search.FindFirstAndLastPositionOfElementInSortedArray;
 import mx.com.geekflu.algo.prep.binary.search.FindSmallestLetter;
 import mx.com.geekflu.algo.prep.binary.search.FirstBadVersion;
 import mx.com.geekflu.algo.prep.binary.search.PeakIndexInAMountain;
@@ -103,6 +104,18 @@ public class BinarySearchTest {
     int[] nums5 = {24,69,100,99,79,78,67,36,26,19};
     Assert.assertEquals(2, PeakIndexInAMountain.peakIndexInMountainArray(nums5));
 
+  }
+
+  @Test
+  public void test_find_first_last_index() {
+    int[] nums1 = {5,7,7,8,8,10};
+    int[] expected1 = {3, 4};
+
+    int[] nums2 = {};
+    int[] expected = {-1, -1};
+    Assert.assertArrayEquals(expected1, FindFirstAndLastPositionOfElementInSortedArray.searchRange(nums1, 8));
+    Assert.assertArrayEquals(expected, FindFirstAndLastPositionOfElementInSortedArray.searchRange(nums1, 6));
+    Assert.assertArrayEquals(expected, FindFirstAndLastPositionOfElementInSortedArray.searchRange(nums2, 0));
   }
 
 }
