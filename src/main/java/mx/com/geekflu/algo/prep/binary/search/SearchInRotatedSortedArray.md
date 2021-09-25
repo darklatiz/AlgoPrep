@@ -36,46 +36,7 @@ Possibly we can take the next approach:
         }
       }
       ```
-   
-2. Find middle point in array
-3. Determine if it in left or right part of the array based on rotated index
-4. Apply Binary search depending on which side is the target
-
-# Algorithm
-
-```java
-class Solution {
-
-  /**
-   * Find the rotated index in a int array [4,5,6,7,8,0,1,2,3]
-   * @param nums
-   * @return rotated index
-   */
-  public int findRotatedIndex(int[] nums) {
-    if (nums.length == 1) {
-      return 0;
-    }else if (nums.length == 2) {
-      if(nums[0] > nums[1]) {
-        return 1;
-      }else{
-        return 0;
-      }
-    }
-    
-    int start = 0;
-    int end = nums.length - 1;
-    
-    while (start <= end) {
-      int mid = start + (end - start) / 2;
-      if (num[mid] > nums[mid + 1]) {
-        return mid + 1;
-      }else {
-        start = mid + 1;
-      }
-    }
-    return 0;
-    
-  }
-}
-
-```
+   2. Once we have the rotated index we can search based on it
+      1. if **target** < **nums[0]** this means that the target is on the right side of the array, so we search from **rotatedIndex** to **end of array**
+      2. else we search from 0 to rotatedIndex - 1
+      3. return value if exists

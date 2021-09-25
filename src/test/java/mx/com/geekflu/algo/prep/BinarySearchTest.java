@@ -142,15 +142,37 @@ public class BinarySearchTest {
     int[] arr04 = {4, 5, 6, 7, 0, 1, 2};
     int[] arr05 = {1};
     int[] arr06 = {1, 3, 5};
+    int[] arr07 = {17, 18, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15};
+    int[] arr08 = {3, 5, 1};
 
-//    Assert.assertEquals(0, FindSmallestLetter.search(arr06, 0));
-//    Assert.assertEquals(0, FindSmallestLetter.search(arr03, 3));
-//    Assert.assertEquals(4, FindSmallestLetter.search(arr04, 0));
-//    Assert.assertEquals(0, FindSmallestLetter.search(arr05, 1));
 
     Assert.assertEquals(4, SearchInRotatedSortedArray.findRotatedIndex(arr00));
     Assert.assertEquals(11, SearchInRotatedSortedArray.findRotatedIndex(arr01));
     Assert.assertEquals(0, SearchInRotatedSortedArray.findRotatedIndex(arr02));
+    Assert.assertEquals(1, SearchInRotatedSortedArray.findRotatedIndex(arr03));
+    Assert.assertEquals(4, SearchInRotatedSortedArray.findRotatedIndex(arr04));
+    Assert.assertEquals(0, SearchInRotatedSortedArray.findRotatedIndex(arr05));
+    Assert.assertEquals(0, SearchInRotatedSortedArray.findRotatedIndex(arr06));
+    Assert.assertEquals(2, SearchInRotatedSortedArray.findRotatedIndex(arr07));
+
+    Assert.assertEquals(-1, SearchInRotatedSortedArray.search(arr08, 0));
+
+    Assert.assertEquals(4, SearchInRotatedSortedArray.search(arr00, 0));
+    Assert.assertEquals(1, SearchInRotatedSortedArray.search(arr00, 4));
+    Assert.assertEquals(2, SearchInRotatedSortedArray.search(arr00, 5));
+
+    Assert.assertEquals(10, SearchInRotatedSortedArray.search(arr01, 13));
+    Assert.assertEquals(11, SearchInRotatedSortedArray.search(arr01, 1));
+    Assert.assertEquals(1, SearchInRotatedSortedArray.search(arr03, 1));
+    Assert.assertEquals(0, SearchInRotatedSortedArray.search(arr05, 1));
+
+    Assert.assertEquals(0, SearchInRotatedSortedArray.search(arr06, 1));
+    Assert.assertEquals(1, SearchInRotatedSortedArray.search(arr06, 3));
+    Assert.assertEquals(2, SearchInRotatedSortedArray.search(arr06, 5));
+
+
+
+
   }
 
 }
