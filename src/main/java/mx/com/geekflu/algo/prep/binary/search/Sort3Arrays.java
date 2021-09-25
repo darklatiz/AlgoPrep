@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Sort3Arrays {
 
+
   public static List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
     List<Integer> intersection = new ArrayList<>();
     for(var target : arr1) {

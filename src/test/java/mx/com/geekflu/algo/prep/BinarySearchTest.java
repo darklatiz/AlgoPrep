@@ -6,6 +6,7 @@ import mx.com.geekflu.algo.prep.binary.search.FindFirstAndLastPositionOfElementI
 import mx.com.geekflu.algo.prep.binary.search.FindSmallestLetter;
 import mx.com.geekflu.algo.prep.binary.search.FirstBadVersion;
 import mx.com.geekflu.algo.prep.binary.search.PeakIndexInAMountain;
+import mx.com.geekflu.algo.prep.binary.search.SearchInRotatedSortedArray;
 import mx.com.geekflu.algo.prep.binary.search.SearchInsertPosition;
 import mx.com.geekflu.algo.prep.binary.search.Sort3Arrays;
 import mx.com.geekflu.algo.prep.util.Util;
@@ -129,6 +130,27 @@ public class BinarySearchTest {
     int[] arr3 = {4,7,8,9,12,21,25,29,32,37,39,48,55,63,65,71,72,81,82,83,96,97,104,109,114,116,118,120,122,124,127,131,136,154,161,165,166,177,182,184,187,200,203,213,223,226,230,240,278,283,286,309,313,315,337,338,349,354,357,362,363,364,366,369,377,380,381,384,393,399,409,410,416,422,435,441,444,452,459,460,462,463,464,467,470,471,485,491,511,515,536,553,557,571,573,576,577,594,598,599,601,618,619,635,642,647,652,661,671,674,680,697,705,712,713,730,733,735,746,754,759,767,768,777,781,787,801,804,808,814,819,831,835,847,859,860,861,872,888,890,892,899,902,907,916,926,928,929,932,937,942,949,960,968,970,980,986,993,996,1005,1006,1007,1009,1014,1017,1026,1028,1031,1036,1041,1043,1047,1048,1054,1062,1066,1069,1072,1075,1079,1089,1090,1091,1094,1105,1111,1112,1113,1122,1139,1142,1143,1148,1157,1159,1160,1162,1163,1187,1190,1202,1219,1235,1244,1247,1249,1250,1261,1265,1279,1296,1297,1308,1309,1313,1315,1320,1323,1340,1344,1358,1370,1372,1375,1380,1415,1418,1419,1422,1432,1438,1450,1464,1466,1471,1473,1476,1479,1490,1503,1508,1511,1521,1535,1538,1541,1562,1571,1572,1576,1583,1602,1618,1620,1626,1628,1630,1647,1650,1662,1664,1665,1667,1669,1679,1686,1687,1705,1707,1742,1745,1750,1757,1784,1793,1813,1825,1826,1827,1846,1854,1863,1871,1872,1878,1886,1888,1898,1909,1913,1915,1916,1919,1932,1935,1939,1948,1970,1984,1996};
     List<Integer> expected = List.of(161,200,1159,1247,1888);
     Assert.assertEquals(expected, Sort3Arrays.arraysIntersection(arr1, arr2, arr3));
+  }
+
+  @Test
+  public void test_find_smallest() {
+
+    int[] arr00 = {3, 4, 5, 6, 0, 1, 2};
+    int[] arr01 = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2};
+    int[] arr02 = {3, 4, 5, 6, 7, 8, 9};
+    int[] arr03 = {3, 1};
+    int[] arr04 = {4, 5, 6, 7, 0, 1, 2};
+    int[] arr05 = {1};
+    int[] arr06 = {1, 3, 5};
+
+//    Assert.assertEquals(0, FindSmallestLetter.search(arr06, 0));
+//    Assert.assertEquals(0, FindSmallestLetter.search(arr03, 3));
+//    Assert.assertEquals(4, FindSmallestLetter.search(arr04, 0));
+//    Assert.assertEquals(0, FindSmallestLetter.search(arr05, 1));
+
+    Assert.assertEquals(4, SearchInRotatedSortedArray.findRotatedIndex(arr00));
+    Assert.assertEquals(11, SearchInRotatedSortedArray.findRotatedIndex(arr01));
+    Assert.assertEquals(0, SearchInRotatedSortedArray.findRotatedIndex(arr02));
   }
 
 }

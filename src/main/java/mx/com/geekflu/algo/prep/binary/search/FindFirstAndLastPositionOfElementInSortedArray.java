@@ -1,5 +1,9 @@
 package mx.com.geekflu.algo.prep.binary.search;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class FindFirstAndLastPositionOfElementInSortedArray {
 
   public static int[] searchRange(int[] nums, int target) {
@@ -34,4 +38,67 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
     return ans;
   }
 
+  public int[] kWeakestRows(int[][] mat, int k) {
+    //brute force
+    List<Pair> pairs = new ArrayList<>();
+    if(mat == null || mat.length <= 0) {
+      return new int[0];
+    }
+
+    float factor = (float) 1 / mat.length;
+    for(int row = 0; row < mat.length; row++) {
+      int numSoldiers = 0;
+      for(int col = 0; col < mat[row].length ; col++) {
+        if(mat[row][col] == 1) {
+          numSoldiers++;
+        }
+      }
+      float res = (float) numSoldiers/mat[row].length * factor;
+      pairs.add(new Pair(row, res));
+    }
+    Collections.sort(pairs);
+    int[] weakest = new int[k];
+    for(int i = 0; i < k; i++) {
+      weakest[i] = pairs.get(i).row;
+    }
+    return weakest;
+
+  }
+
+  public static void main(String[] args) {
+    int[][] integer2DArray = {
+      {1,1,0,0,0},
+      {1,1,1,1,0},
+      {1,0,0,0,0},
+      {1,1,0,0,0},
+      {1,1,1,1,1}
+    };
+
+    var obj = new FindFirstAndLastPositionOfElementInSortedArray();
+    obj.kWeakestRows(integer2DArray, 3);
+  }
+
+}
+class Pair implements Comparable<Pair>{
+  int row;
+  float strength;
+
+  public Pair(int row, float strength){
+    this.row = row;
+    this.strength = strength;
+  }
+
+  @Override
+  public int compareTo(Pair u) {
+    if(this.strength < u.strength) {
+      return -1;
+    }else if(this.strength > u.strength) {
+      return 1;
+    }else {
+      if(this.row < u.row){
+        return -1;
+      }
+      return 0;
+    }
+  }
 }
