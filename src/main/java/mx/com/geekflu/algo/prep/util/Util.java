@@ -15,6 +15,14 @@ public class Util {
     return arr;
   }
 
+  public static int[] generatePrimitiveArray(int size) {
+    int[] arr = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr[i] = Util.random.nextInt(size * 10);
+    }
+    return arr;
+  }
+
   public static Integer[] generateArray(int size, boolean ascOrder) {
     Integer[] arr = generateArray(size);
     if (ascOrder) {
