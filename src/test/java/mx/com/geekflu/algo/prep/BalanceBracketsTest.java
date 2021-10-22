@@ -15,4 +15,13 @@ public class BalanceBracketsTest {
     Assert.assertTrue(BalanceBrackets.isBalance("<[{()}]><><><>()"));
   }
 
+  @Test
+  public void test_balancing_bracket_string() {
+    String balancedStr = BalanceBrackets.balanceBrackets("><>><");
+    Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
+
+    balancedStr = BalanceBrackets.balanceBrackets("><><<><>>>><><<<>><<");
+    Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
+  }
+
 }
