@@ -13,7 +13,7 @@ public class SortingTest {
 
   @Test
   public void test_merge_sort_copying_space() {
-    var array = Util.generatePrimitiveArray(1000);
+    var array = Util.generatePrimitiveArray(9);
     log.info("Array to be sort: {}", Arrays.toString(array));
     var sorted = MergeSort.mergeSort(array);
     log.info("Array sorted: {}", Arrays.toString(sorted));
