@@ -21,6 +21,19 @@ public class BalanceBracketsTest {
     Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
 
     balancedStr = BalanceBrackets.balanceBrackets("><><<><>>>><><<<>><<");
+    log.info("Trying to balance: ><><<><>>>><><<<>><<, the result after balancing is: {}", balancedStr);
+    Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
+
+    balancedStr = BalanceBrackets.balanceBrackets(">");
+    log.info("Trying to balance: >, the result after balancing is: {}", balancedStr);
+    Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
+
+    balancedStr = BalanceBrackets.balanceBrackets("<");
+    log.info("Trying to balance: <, the result after balancing is: {}", balancedStr);
+    Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
+
+    balancedStr = BalanceBrackets.balanceBrackets("");
+    log.info("Trying to balance: '', the result after balancing is: {}", balancedStr);
     Assert.assertTrue(BalanceBrackets.isBalance(balancedStr));
   }
 
