@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @Slf4j
-public class SlidingWindow {
+public class SlidingWindowTest {
 
   @Test
   public void test_average_of_subarray_size_k() {
@@ -37,5 +37,12 @@ public class SlidingWindow {
   public void test_longest_substring_k_distinct() {
     int len = LongestSubstringKDistinct.findLength("araaci", 2);
     Assert.assertEquals(4, len);
+  }
+
+  @Test
+  public void test_longest_substring_distinct() {
+    String len = LongestSubstringKDistinct.longestSubstring("nan");
+    len = LongestSubstringKDistinct.longestSubstring("nndNfdfdf");
+    len = LongestSubstringKDistinct.longestSubstring("abcdeaaasdfghjk");
   }
 }
