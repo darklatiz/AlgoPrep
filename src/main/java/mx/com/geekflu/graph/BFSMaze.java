@@ -22,7 +22,7 @@ public class BFSMaze {
 
     // Validate edge cases when origin 0,0 == 1, 1 means wall
 
-    if(maze[0][0] == 1) {
+    if(maze[0][0] == Cell.WALL) {
       printMaze(maze);
       return false;
     }
@@ -72,10 +72,10 @@ public class BFSMaze {
         continue;
       }
 
-      //  2 means visited
-      //  1 means wall
-      if (maze[neighbourRow][neighbourCol] != 2 &&
-            maze[neighbourRow][neighbourCol] != 1) {
+      //  VISITED
+      //  WALL
+      if (maze[neighbourRow][neighbourCol] != Cell.VISITED &&
+            maze[neighbourRow][neighbourCol] != Cell.WALL) {
         Cell e = new Cell(neighbourRow, neighbourCol, cell.getMaxRowsAllowed(), cell.getMaxColumsAllowed());
         e.setDistanceFromOrigin(cell.getDistanceFromOrigin() + 1);
         nCells.add(e);
@@ -91,6 +91,10 @@ public class BFSMaze {
 @Getter
 @Setter
 class Cell {
+
+  public static final long VISITED = 2;
+  public static final long WALL = 1;
+
   private int row;
   private int column;
   private boolean isVisited;
@@ -121,7 +125,7 @@ class Cell {
   }
 
   public void markAsVisited(long[][] maze) {
-    maze[this.row][this.column] = 2;
+    maze[this.row][this.column] = VISITED;
   }
 }
 
