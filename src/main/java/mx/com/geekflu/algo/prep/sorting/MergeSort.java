@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class MergeSort {
 
+  private MergeSort(){}
+
   /**
    * Sort an array of integers using merge sort
    * @param arr
