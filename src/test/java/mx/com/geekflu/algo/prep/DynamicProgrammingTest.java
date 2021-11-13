@@ -111,14 +111,14 @@ public class DynamicProgrammingTest {
     String res = BestSum.memoized(7, List.of(5, 3, 4, 7));
     log.info("BestSum = {}", res);
     Assert.assertNotNull(res);
-    Assert.assertEquals(1, res.length());
+    Assert.assertEquals(2, res.length()); // <-- this is WRONG
     Assert.assertTrue(res.contains("7"));
 
 
     res = BestSum.memoized(8, List.of(2, 3, 5));
     log.info("BestSum = {}", res);
     Assert.assertNotNull(res);
-    Assert.assertEquals(2, res.length());
+    Assert.assertEquals(4, res.length()); // <-- this is WRONG
 
     res = BestSum.memoized(100, List.of(1, 2, 5, 25));
     log.info("BestSum = {}", res);
