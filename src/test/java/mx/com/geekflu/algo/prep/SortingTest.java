@@ -1,6 +1,8 @@
 package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.com.geekflu.algo.prep.sorting.BubbleSort;
+import mx.com.geekflu.algo.prep.sorting.InsertionSort;
 import mx.com.geekflu.algo.prep.sorting.MergeSort;
 import mx.com.geekflu.algo.prep.sorting.SelectionSort;
 import mx.com.geekflu.algo.prep.util.Util;
@@ -42,6 +44,28 @@ public class SortingTest {
     int[] nullArr = null;
     SelectionSort.sort(nullArr);
     Assert.assertNull(nullArr);
+  }
+
+  @Test
+  public void test_bubble_sort(){
+    int[] arr = {5,4,1,0,5,95,4,-100,200,0};
+    int[] copy = Arrays.copyOf(arr, arr.length);
+    log.info("Array before sort: {}", Arrays.toString(arr));
+    BubbleSort.sort(arr);
+    log.info("Array after sort: {}", Arrays.toString(arr));
+    Arrays.sort(copy);
+    Assert.assertArrayEquals(copy, arr);
+  }
+
+  @Test
+  public void test_insertion_sort(){
+    int[] arr = {5,4,1,0,5,95,4,-100,200,0};
+    int[] copy = Arrays.copyOf(arr, arr.length);
+    log.info("Array before sort: {}", Arrays.toString(arr));
+    InsertionSort.sort(arr);
+    log.info("Array after sort: {}", Arrays.toString(arr));
+    Arrays.sort(copy);
+    Assert.assertArrayEquals(copy, arr);
   }
 
 }
