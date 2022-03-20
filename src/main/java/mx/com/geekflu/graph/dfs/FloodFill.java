@@ -20,7 +20,7 @@ public class FloodFill {
     return image;
   }
 
-  public void dfsFloodFill_recursive(int[][] image, int row, int column, int oldColor, int newColor) {
+  private void dfsFloodFill_recursive(int[][] image, int row, int column, int oldColor, int newColor) {
     if (isBoundary(image, row, column, oldColor, newColor)) {
       return;
     }
@@ -39,7 +39,7 @@ public class FloodFill {
     }
 
     // column boundaries
-    if (column < 0 || column > image[0].length) {
+    if (column < 0 || column > image[0].length - 1) {
       return true;
     }
 
