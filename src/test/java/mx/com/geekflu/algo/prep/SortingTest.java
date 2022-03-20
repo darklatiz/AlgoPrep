@@ -18,7 +18,7 @@ public class SortingTest {
   public void test_merge_sort_copying_space() {
     var array = Util.generatePrimitiveArray(9);
     log.info("Array to be sort: {}", Arrays.toString(array));
-    var sorted = MergeSort.mergeSort(array);
+    var sorted = MergeSort.mergeSortUsingExtraSpace(array);
     log.info("Array sorted: {}", Arrays.toString(sorted));
     Arrays.sort(array);
     Assert.assertArrayEquals(array, sorted);
@@ -59,7 +59,7 @@ public class SortingTest {
 
   @Test
   public void test_insertion_sort(){
-    int[] arr = {5,4,1,0,5,95,4,-100,200,0};
+    int[] arr = {-5,4,-1,0,5,95,4,-100,200,0};
     int[] copy = Arrays.copyOf(arr, arr.length);
     log.info("Array before sort: {}", Arrays.toString(arr));
     InsertionSort.sort(arr);
