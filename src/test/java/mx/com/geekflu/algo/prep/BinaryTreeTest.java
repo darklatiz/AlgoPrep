@@ -1,11 +1,12 @@
 package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
-import mx.com.geekflu.algo.prep.data.linked.list.LinkedList;
 import mx.com.geekflu.graph.BinaryTree;
 import mx.com.geekflu.graph.BinaryTreeUtils;
 import mx.com.geekflu.graph.core.BinaryTreeNode;
 import org.junit.Test;
+
+import java.util.LinkedList;
 
 @Slf4j
 public class BinaryTreeTest {
@@ -14,10 +15,11 @@ public class BinaryTreeTest {
   public void test_depth_first_values() {
     BinaryTree<Integer> binaryTree = BinaryTreeUtils.createBinaryTreeIntegers(10);
     log.info("Depth First Values");
-    binaryTree.depthFirstValues().print();
+    binaryTree.depthFirstValues();
 
     log.info("Breadth First Values Or Level traversal");
-    binaryTree.breadthFirstValues().print();
+    binaryTree.breadthFirstValues();
+    log.info("Level Order BFS = {}", binaryTree.levelOrder());
   }
 
   @Test
@@ -43,12 +45,6 @@ public class BinaryTreeTest {
     BinaryTree<Character> binaryTree = new BinaryTree<>(characterBinaryTreeNodeA);
     LinkedList<Character> resDFS = binaryTree.depthFirstValues();
     LinkedList<Character> resBFS = binaryTree.breadthFirstValues();
-
-    log.info("Depth First Values Traversal");
-    resDFS.print();
-
-    log.info("Breadth First Values Traversal");
-    resBFS.print();
 
     log.info("Height of a Binary tree - {}", binaryTree.getHeight());
 

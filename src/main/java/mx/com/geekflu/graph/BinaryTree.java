@@ -3,11 +3,15 @@ package mx.com.geekflu.graph;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.algo.prep.data.core.ifc.Printable;
-import mx.com.geekflu.algo.prep.data.linked.list.LinkedList;
 import mx.com.geekflu.graph.core.BinaryTreeNode;
 import mx.com.geekflu.graph.core.Traversal;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 @Slf4j
 @Getter
@@ -19,34 +23,48 @@ public class BinaryTree<T> implements Printable {
     this.root = head;
   }
 
-  public static <E> void treeTraversal(BinaryTreeNode<E> root, Traversal traversal) {
+  public List<T> treeTraversal(Traversal traversal) {
     if (root != null) {
       if (traversal == Traversal.IN_ORDER) {
-        inOrderTraversal(root);
+        return inOrderTraversal(this.root, new ArrayList<>());
       } else if (traversal == Traversal.PRE_ORDER) {
-        preOrderTraversal(root);
+        return preOrderTraversal(this.root, new ArrayList<>());
       } else {
-        postOrderTraversal(root);
+        return postOrderTraversal(this.root, new ArrayList<>());
       }
+    }else {
+      return Collections.emptyList();
     }
   }
 
-  private static <E> void postOrderTraversal(BinaryTreeNode<E> root) {
-    inOrderTraversal(root.getLeft());
-    inOrderTraversal(root.getRight());
-    log.info("{} ", root.getData());
+  private List<T> postOrderTraversal(BinaryTreeNode<T> node, List<T> values) {
+    if (Objects.isNull(node)) {
+      return values;
+    }
+    postOrderTraversal(node.getLeft(), values);
+    postOrderTraversal(node.getRight(), values);
+    values.add(node.getData());
+    return values;
   }
 
-  private static <E> void preOrderTraversal(BinaryTreeNode<E> root) {
-    log.info("{} ", root.getData());
-    inOrderTraversal(root.getLeft());
-    inOrderTraversal(root.getRight());
+  private List<T> preOrderTraversal(BinaryTreeNode<T> node, List<T> values) {
+    if (Objects.isNull(node)) {
+      return values;
+    }
+    values.add(node.getData());
+    preOrderTraversal(node.getLeft(), values);
+    preOrderTraversal(node.getRight(), values);
+    return values;
   }
 
-  private static <E> void inOrderTraversal(BinaryTreeNode<E> root) {
-    inOrderTraversal(root.getLeft());
-    log.info("{} ", root.getData());
-    inOrderTraversal(root.getRight());
+  private List<T> inOrderTraversal(BinaryTreeNode<T> node, List<T> values) {
+    if (Objects.isNull(node)) {
+      return values;
+    }
+    inOrderTraversal(node.getLeft(), values);
+    values.add(node.getData());
+    inOrderTraversal(node.getRight(), values);
+    return values;
   }
 
   /**
@@ -60,17 +78,17 @@ public class BinaryTree<T> implements Printable {
       return result;
     }
     LinkedList<BinaryTreeNode<T>> stack = new LinkedList<>();
-    stack.appendFirst(root);
+    stack.addFirst(root);
     while (!stack.isEmpty()) {
-      BinaryTreeNode<T> top = stack.getFirst();
+      BinaryTreeNode<T> top = stack.pollFirst();
 
       if (Objects.nonNull(top.getRight())) {
-        stack.appendFirst(top.getRight());
+        stack.addFirst(top.getRight());
       }
       if (Objects.nonNull(top.getLeft())) {
-        stack.appendFirst(top.getLeft());
+        stack.addFirst(top.getLeft());
       }
-      result.append(top.getData());
+      result.add(top.getData());
     }
     return result;
   }
@@ -86,19 +104,51 @@ public class BinaryTree<T> implements Printable {
       return result;
     }
     LinkedList<BinaryTreeNode<T>> queue = new LinkedList<>();
-    queue.append(this.root);
+    queue.add(this.root);
     while (!queue.isEmpty()) {
-      BinaryTreeNode<T> current = queue.getFirst();
+      BinaryTreeNode<T> current = queue.pollFirst();
       if (Objects.nonNull(current.getLeft())) {
-        queue.append(current.getLeft());
+        queue.add(current.getLeft());
       }
 
       if (Objects.nonNull(current.getRight())) {
-        queue.append(current.getRight());
+        queue.add(current.getRight());
       }
-      result.append(current.getData());
+      result.add(current.getData());
     }
     return result;
+  }
+
+  public List<LinkedList<T>> levelOrder() {
+    if(this.root == null) {
+      return Collections.emptyList();
+    }
+    List<LinkedList<T>> result = new ArrayList<>();
+    Queue<BinaryTreeNode<T>> q = new LinkedList<>();
+    q.add(this.root);
+    while(!q.isEmpty()) {
+      int levelSize = q.size();
+      LinkedList<T> levelValues = new LinkedList<>();
+      for(var i = 0; i < levelSize; i++) {
+        var current = q.poll();
+        levelValues.add(current.getData());
+        if(Objects.nonNull(current.getLeft())) {
+          q.add(current.getLeft());
+        }
+        if(Objects.nonNull(current.getRight())) {
+          q.add(current.getRight());
+        }
+      }
+      result.add(levelValues);
+    }
+    return result;
+  }
+
+  public static <E> int size(BinaryTreeNode<E> binaryTreeNode) {
+    if (Objects.isNull(binaryTreeNode)) {
+      return 0;
+    }
+    return size(binaryTreeNode.getLeft()) + size(binaryTreeNode.getRight()) + 1;
   }
 
   public int getHeight() {

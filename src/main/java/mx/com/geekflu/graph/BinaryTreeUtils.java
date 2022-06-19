@@ -12,6 +12,7 @@ public class BinaryTreeUtils {
   private BinaryTreeUtils() {
   }
 
+
   public static BinaryTree<Integer> createBinaryTreeIntegers(int size) {
     int idx = 0;
     BinaryTreeNode<Integer> root = new BinaryTreeNode<>(idx++);
