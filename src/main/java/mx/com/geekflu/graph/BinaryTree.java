@@ -72,15 +72,15 @@ public class BinaryTree<T> implements Printable {
    *
    * @return Tree traversal using DFS approach
    */
-  public LinkedList<T> depthFirstValues() {
-    LinkedList<T> result = new LinkedList<>();
+  public static <E> List<E> depthFirstValues(BinaryTreeNode<E> root) {
+    List<E> result = new LinkedList<>();
     if (Objects.isNull(root)) {
       return result;
     }
-    LinkedList<BinaryTreeNode<T>> stack = new LinkedList<>();
+    LinkedList<BinaryTreeNode<E>> stack = new LinkedList<>();
     stack.addFirst(root);
     while (!stack.isEmpty()) {
-      BinaryTreeNode<T> top = stack.pollFirst();
+      BinaryTreeNode<E> top = stack.pollFirst();
 
       if (Objects.nonNull(top.getRight())) {
         stack.addFirst(top.getRight());
@@ -98,15 +98,15 @@ public class BinaryTree<T> implements Printable {
    *
    * @return
    */
-  public LinkedList<T> breadthFirstValues() {
-    LinkedList<T> result = new LinkedList<>();
-    if (Objects.isNull(this.root)) {
+  public static <E> List<E> breadthFirstValues(BinaryTreeNode<E> root) {
+    List<E> result = new LinkedList<>();
+    if (Objects.isNull(root)) {
       return result;
     }
-    LinkedList<BinaryTreeNode<T>> queue = new LinkedList<>();
-    queue.add(this.root);
+    LinkedList<BinaryTreeNode<E>> queue = new LinkedList<>();
+    queue.add(root);
     while (!queue.isEmpty()) {
-      BinaryTreeNode<T> current = queue.pollFirst();
+      BinaryTreeNode<E> current = queue.pollFirst();
       if (Objects.nonNull(current.getLeft())) {
         queue.add(current.getLeft());
       }
@@ -119,16 +119,16 @@ public class BinaryTree<T> implements Printable {
     return result;
   }
 
-  public List<LinkedList<T>> levelOrder() {
-    if(this.root == null) {
+  public static <E> List<LinkedList<E>> levelOrder(BinaryTreeNode<E> head) {
+    if(head == null) {
       return Collections.emptyList();
     }
-    List<LinkedList<T>> result = new ArrayList<>();
-    Queue<BinaryTreeNode<T>> q = new LinkedList<>();
-    q.add(this.root);
+    List<LinkedList<E>> result = new ArrayList<>();
+    Queue<BinaryTreeNode<E>> q = new LinkedList<>();
+    q.add(head);
     while(!q.isEmpty()) {
       int levelSize = q.size();
-      LinkedList<T> levelValues = new LinkedList<>();
+      LinkedList<E> levelValues = new LinkedList<>();
       for(var i = 0; i < levelSize; i++) {
         var current = q.poll();
         levelValues.add(current.getData());
@@ -142,6 +142,31 @@ public class BinaryTree<T> implements Printable {
       result.add(levelValues);
     }
     return result;
+  }
+
+  public boolean isSymmetric() {
+    return BinaryTree.isSymmetric(this.root, this.root);
+  }
+
+  public static <E> boolean isSymmetric(BinaryTreeNode<E> node1, BinaryTreeNode<E> node2) {
+    if(Objects.isNull(node1) && Objects.isNull(node2)) {
+      return true;
+    }
+
+    return Objects.nonNull(node1) &&
+      Objects.nonNull(node2) &&
+      valuesEqual(node1.getData(), node2.getData()) &&
+      isSymmetric(node1.getLeft(), node2.getRight()) &&
+      isSymmetric(node1.getRight(), node2.getLeft());
+
+  }
+
+  private static <E> boolean valuesEqual(E data, E data1) {
+    if (data.getClass().getTypeName().equals("java.lang.String")) {
+      return data.equals(data1);
+    }else {
+      return data == data1;
+    }
   }
 
   public static <E> int size(BinaryTreeNode<E> binaryTreeNode) {

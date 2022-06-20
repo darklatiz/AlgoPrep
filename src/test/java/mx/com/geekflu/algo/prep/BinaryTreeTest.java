@@ -13,13 +13,12 @@ public class BinaryTreeTest {
 
   @Test
   public void test_depth_first_values() {
-    BinaryTree<Integer> binaryTree = BinaryTreeUtils.createBinaryTreeIntegers(10);
-    log.info("Depth First Values");
-    binaryTree.depthFirstValues();
+    BinaryTree<Integer> binaryTree = BinaryTreeUtils.createBinaryTreeIntegers(20);
+    log.info("Depth First Values: {}", BinaryTree.depthFirstValues(binaryTree.getRoot()));
 
-    log.info("Breadth First Values Or Level traversal");
-    binaryTree.breadthFirstValues();
-    log.info("Level Order BFS = {}", binaryTree.levelOrder());
+    log.info("Breadth First Values: {}" , BinaryTree.breadthFirstValues(binaryTree.getRoot()));
+
+    log.info("Level Order BFS = {}", BinaryTree.levelOrder(binaryTree.getRoot()));
   }
 
   @Test
@@ -43,8 +42,6 @@ public class BinaryTreeTest {
     characterBinaryTreeNodeC.setRight(characterBinaryTreeNodeG);
 
     BinaryTree<Character> binaryTree = new BinaryTree<>(characterBinaryTreeNodeA);
-    LinkedList<Character> resDFS = binaryTree.depthFirstValues();
-    LinkedList<Character> resBFS = binaryTree.breadthFirstValues();
 
     log.info("Height of a Binary tree - {}", binaryTree.getHeight());
 
