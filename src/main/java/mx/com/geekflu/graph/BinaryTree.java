@@ -218,7 +218,7 @@ public class BinaryTree<T> implements Printable {
     return BinaryTree.findMin(root.getLeft());
   }
 
-  public static Number findMin_Iterative(BinaryTreeNode<? extendsK Number> root) {
+  public static Number findMin_Iterative(BinaryTreeNode<? extends Number> root) {
     if(root == null) {
       throw new RuntimeException("Root is null");
     }
