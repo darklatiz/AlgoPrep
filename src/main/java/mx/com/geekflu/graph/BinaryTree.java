@@ -32,7 +32,7 @@ public class BinaryTree<T> implements Printable {
       } else {
         return postOrderTraversal(this.root, new ArrayList<>());
       }
-    }else {
+    } else {
       return Collections.emptyList();
     }
   }
@@ -120,22 +120,22 @@ public class BinaryTree<T> implements Printable {
   }
 
   public static <E> List<LinkedList<E>> levelOrder(BinaryTreeNode<E> head) {
-    if(head == null) {
+    if (head == null) {
       return Collections.emptyList();
     }
     List<LinkedList<E>> result = new ArrayList<>();
     Queue<BinaryTreeNode<E>> q = new LinkedList<>();
     q.add(head);
-    while(!q.isEmpty()) {
+    while (!q.isEmpty()) {
       int levelSize = q.size();
       LinkedList<E> levelValues = new LinkedList<>();
-      for(var i = 0; i < levelSize; i++) {
+      for (var i = 0; i < levelSize; i++) {
         var current = q.poll();
         levelValues.add(current.getData());
-        if(Objects.nonNull(current.getLeft())) {
+        if (Objects.nonNull(current.getLeft())) {
           q.add(current.getLeft());
         }
-        if(Objects.nonNull(current.getRight())) {
+        if (Objects.nonNull(current.getRight())) {
           q.add(current.getRight());
         }
       }
@@ -149,7 +149,7 @@ public class BinaryTree<T> implements Printable {
   }
 
   public static <E> boolean isSymmetric(BinaryTreeNode<E> node1, BinaryTreeNode<E> node2) {
-    if(Objects.isNull(node1) && Objects.isNull(node2)) {
+    if (Objects.isNull(node1) && Objects.isNull(node2)) {
       return true;
     }
 
@@ -164,7 +164,7 @@ public class BinaryTree<T> implements Printable {
   private static <E> boolean valuesEqual(E data, E data1) {
     if (data.getClass().getTypeName().equals("java.lang.String")) {
       return data.equals(data1);
-    }else {
+    } else {
       return data == data1;
     }
   }
@@ -180,11 +180,67 @@ public class BinaryTree<T> implements Printable {
     return getHeight(this.root);
   }
 
-  private int getHeight(BinaryTreeNode<T> node) {
+  public static <E> int getHeight(BinaryTreeNode<E> node) {
     if (Objects.isNull(node)) {
-      return 0;
+      return -1;
     }
     return Math.max(getHeight(node.getLeft()), getHeight(node.getRight())) + 1;
+  }
+
+  public static Number findMax_iterative(BinaryTreeNode<? extends Number> root) {
+    if(root == null) {
+      throw new RuntimeException("Root is null");
+    }
+    while(root.getRight() != null) {
+      root = root.getRight();
+    }
+
+    return root.getData();
+  }
+  public static Number findMax(BinaryTreeNode<? extends Number> root) {
+    if(root == null) {
+      throw new RuntimeException("Root is null");
+    }
+    if(root.getRight() == null) {
+      return root.getData();
+    }
+
+    return findMax(root.getRight());
+  }
+
+  public static Number findMin(BinaryTreeNode<? extends Number> root) {
+    if(root == null) {
+      throw new RuntimeException("Root is null");
+    }
+    if(Objects.isNull(root.getLeft())) {
+      return root.getData();
+    }
+    return BinaryTree.findMin(root.getLeft());
+  }
+
+  public static Number findMin_Iterative(BinaryTreeNode<? extendsK Number> root) {
+    if(root == null) {
+      throw new RuntimeException("Root is null");
+    }
+    BinaryTreeNode<? extends Number> current = root;
+    while(current.getLeft() != null) {
+      current = current.getLeft();
+    }
+
+    return current.getData();
+  }
+
+  public static <E> boolean areIdentical(BinaryTreeNode<E> root1, BinaryTreeNode<E> root2) {
+    if(root1 == null && root2 == null) {
+      return true;
+    }
+
+    return root1 != null &&
+      root2 != null &&
+      valuesEqual(root1.getData(), root2.getData()) &&
+      areIdentical(root1.getLeft(), root2.getLeft()) &&
+      areIdentical(root1.getRight(), root2.getRight());
+
   }
 
   @Override

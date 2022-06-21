@@ -4,9 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.geekflu.graph.BinaryTree;
 import mx.com.geekflu.graph.BinaryTreeUtils;
 import mx.com.geekflu.graph.core.BinaryTreeNode;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.LinkedList;
 
 @Slf4j
 public class BinaryTreeTest {
@@ -49,6 +48,90 @@ public class BinaryTreeTest {
 
   @Test
   public void test_height_binary_tree() {
+
+  }
+
+  @Test
+  public void test_is_symmetric() {
+    BinaryTreeNode<Character> root = new BinaryTreeNode<>('a');
+    BinaryTreeNode<Character> left = new BinaryTreeNode<>('b');
+    BinaryTreeNode<Character> right = new BinaryTreeNode<>('b');
+
+    root.setLeft(left);
+    root.setRight(right);
+
+    BinaryTreeNode<Character> lleft = new BinaryTreeNode<>('d');
+    BinaryTreeNode<Character> lright = new BinaryTreeNode<>('e');
+    BinaryTreeNode<Character> rleft = new BinaryTreeNode<>('e');
+    BinaryTreeNode<Character> rright = new BinaryTreeNode<>('d');
+
+    left.setLeft(lleft);
+    left.setRight(lright);
+
+    right.setLeft(rleft);
+    right.setRight(rright);
+
+    boolean symmetric = BinaryTree.isSymmetric(root, root);
+    Assert.assertTrue(symmetric);
+  }
+
+  @Test
+  public void test_is_identical() {
+    BinaryTreeNode<Character> root = new BinaryTreeNode<>('a');
+    BinaryTreeNode<Character> left = new BinaryTreeNode<>('b');
+    BinaryTreeNode<Character> right = new BinaryTreeNode<>('b');
+
+    root.setLeft(left);
+    root.setRight(right);
+
+    BinaryTreeNode<Character> lleft = new BinaryTreeNode<>('d');
+    BinaryTreeNode<Character> lright = new BinaryTreeNode<>('e');
+    BinaryTreeNode<Character> rleft = new BinaryTreeNode<>('d');
+    BinaryTreeNode<Character> rright = new BinaryTreeNode<>('e');
+
+    left.setLeft(lleft);
+    left.setRight(lright);
+
+    right.setLeft(rleft);
+    right.setRight(rright);
+
+    boolean areIdentical = BinaryTree.areIdentical(root, root);
+    Assert.assertTrue(areIdentical);
+
+
+  }
+
+  @Test
+  public void find_min() {
+    BinaryTreeNode<Integer> root = new BinaryTreeNode<>(15);
+    BinaryTreeNode<Integer> left = new BinaryTreeNode<>(10);
+    BinaryTreeNode<Integer> right = new BinaryTreeNode<>(20);
+
+    root.setLeft(left);
+    root.setRight(right);
+
+    BinaryTreeNode<Integer> lleft = new BinaryTreeNode<>(8);
+    BinaryTreeNode<Integer> lright = new BinaryTreeNode<>(12);
+    BinaryTreeNode<Integer> rleft = new BinaryTreeNode<>(17);
+    BinaryTreeNode<Integer> rright = new BinaryTreeNode<>(25);
+
+    left.setLeft(lleft);
+    left.setRight(lright);
+
+    right.setLeft(rleft);
+    right.setRight(rright);
+
+    Number minRecursive = BinaryTree.findMin(root);
+    log.info("Min: {}", minRecursive);
+    Number min_iterative = BinaryTree.findMin_Iterative(root);
+    log.info("Min: {}", min_iterative);
+    Assert.assertEquals(minRecursive, min_iterative);
+
+    Number maxRecursive = BinaryTree.findMax(root);
+    log.info("Max: {}", maxRecursive);
+    Number max_iterative = BinaryTree.findMax_iterative(root);
+    log.info("Max: {}", max_iterative);
+    Assert.assertEquals(maxRecursive, max_iterative);
 
   }
 
