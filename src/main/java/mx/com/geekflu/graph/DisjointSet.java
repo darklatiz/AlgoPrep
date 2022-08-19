@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 
@@ -79,6 +80,7 @@ public class DisjointSet {
 
     var parent1 = findSet(node1);
     var parent2 = findSet(node2);
+
 
     //if they are part of same set do nothing
     if (parent1.data == parent2.data) {

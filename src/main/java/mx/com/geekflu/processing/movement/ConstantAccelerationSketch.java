@@ -23,7 +23,6 @@ public class ConstantAccelerationSketch extends PApplet {
     this.mover.setLimitSpeed(true);
   }
 
-
   @Override
   public void draw() {
     background(255);

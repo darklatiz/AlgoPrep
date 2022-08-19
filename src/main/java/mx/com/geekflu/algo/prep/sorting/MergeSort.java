@@ -1,24 +1,50 @@
 package mx.com.geekflu.algo.prep.sorting;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MergeSort {
 
   private MergeSort(){}
 
+  public static void mergeSort(int[] nums){
+    if(Objects.isNull(nums) || nums.length <= 0){
+      return;
+    }
+
+    mergeSort(nums, 0, nums.length - 1);
+
+  }
+
+  private static void mergeSort(int[] array, int start, int end) {
+    if(start >= end){
+      return;
+    }
+
+    int mid = start + (end - start) / 2;
+    mergeSort(array, start, mid);
+    mergeSort(array, mid + 1, end);
+    mergeHalves(array, start, end);
+  }
+
+  private static void mergeHalves(int[] array, int start, int end) {
+    int[] temp = new int[array.length];
+    
+  }
+
   /**
    * Sort an array of integers using merge sort
    * @param arr
    */
-  public static int[] mergeSort(int[] arr) {
+  public static int[] mergeSortUsingExtraSpace(int[] arr) {
     if (arr.length == 1) {
       return arr;
     }
 
     int mid = arr.length / 2;
 
-    int[] left = mergeSort(Arrays.copyOfRange(arr, 0, mid));
-    int[] right = mergeSort(Arrays.copyOfRange(arr, mid, arr.length));
+    int[] left = mergeSortUsingExtraSpace(Arrays.copyOfRange(arr, 0, mid));
+    int[] right = mergeSortUsingExtraSpace(Arrays.copyOfRange(arr, mid, arr.length));
 
     return merge(left, right);
 
