@@ -1,14 +1,11 @@
 package mx.com.geekflu.algo.prep;
 
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
 import mx.com.geekflu.algo.prep.data.core.TreeNode;
 import mx.com.geekflu.graph.binary.tree.BinaryTreeProblems;
-=======
 import mx.com.geekflu.graph.BinaryTree;
 import mx.com.geekflu.graph.BinaryTreeUtils;
 import mx.com.geekflu.graph.core.BinaryTreeNode;
->>>>>>> origin/master
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +13,6 @@ import org.junit.Test;
 public class BinaryTreeTest {
 
   @Test
-<<<<<<< HEAD
   public void test_paths_binaryTree() {
     TreeNode<String> head = new TreeNode<>("L");
     head.setLeft(new TreeNode<>("U"));
@@ -56,12 +52,13 @@ public class BinaryTreeTest {
 
     Assert.assertFalse(BinaryTreeProblems.binaryTreeHasSumPaths(null, 16, false));
     Assert.assertFalse(BinaryTreeProblems.binaryTreeHasSumPaths(null, 16, false));
-=======
+  }
+
   public void test_depth_first_values() {
     BinaryTree<Integer> binaryTree = BinaryTreeUtils.createBinaryTreeIntegers(20);
     log.info("Depth First Values: {}", BinaryTree.depthFirstValues(binaryTree.getRoot()));
 
-    log.info("Breadth First Values: {}" , BinaryTree.breadthFirstValues(binaryTree.getRoot()));
+    log.info("Breadth First Values: {}", BinaryTree.breadthFirstValues(binaryTree.getRoot()));
 
     log.info("Level Order BFS = {}", BinaryTree.levelOrder(binaryTree.getRoot()));
   }
@@ -143,13 +140,10 @@ public class BinaryTreeTest {
 
     boolean areIdentical = BinaryTree.areIdentical(root, root);
     Assert.assertTrue(areIdentical);
->>>>>>> origin/master
-
 
   }
 
   @Test
-<<<<<<< HEAD
   public void tes_find_all_paths_sum() {
 
     /*
@@ -171,7 +165,8 @@ public class BinaryTreeTest {
     log.info("Paths with sum 23: {}", BinaryTreeProblems.findPaths(root, 23));
     log.info("Paths with sum 18: {}", BinaryTreeProblems.findPaths(root, 18));
     log.info("Paths with sum 1: {}", BinaryTreeProblems.findPaths(root, 1));
-=======
+  }
+
   public void find_min() {
     BinaryTreeNode<Integer> root = new BinaryTreeNode<>(15);
     BinaryTreeNode<Integer> left = new BinaryTreeNode<>(10);
@@ -203,7 +198,6 @@ public class BinaryTreeTest {
     log.info("Max: {}", max_iterative);
     Assert.assertEquals(maxRecursive, max_iterative);
 
->>>>>>> origin/master
   }
 
 }
