@@ -36,6 +36,7 @@ public class BFSMaze {
     while (!rowQ.isEmpty()) {
       Cell current = rowQ.poll();
       current.markAsVisited(maze);
+      log.info("CELL: {}", current);
 
 
       List<Cell> neighbours = getNeighbours(current, maze);
@@ -68,7 +69,7 @@ public class BFSMaze {
         continue;
       }
 
-      if (neighbourRow >= cell.getMaxRowsAllowed() || neighbourCol >= cell.getMaxColumsAllowed()) {
+      if (neighbourRow >= cell.getMaxRowsAllowed() || neighbourCol >= cell.getMaxColumnsAllowed()) {
         continue;
       }
 
@@ -76,7 +77,7 @@ public class BFSMaze {
       //  WALL
       if (maze[neighbourRow][neighbourCol] != Cell.VISITED &&
             maze[neighbourRow][neighbourCol] != Cell.WALL) {
-        Cell e = new Cell(neighbourRow, neighbourCol, cell.getMaxRowsAllowed(), cell.getMaxColumsAllowed());
+        Cell e = new Cell(neighbourRow, neighbourCol, cell.getMaxRowsAllowed(), cell.getMaxColumnsAllowed());
         e.setDistanceFromOrigin(cell.getDistanceFromOrigin() + 1);
         nCells.add(e);
       }
@@ -101,7 +102,7 @@ class Cell {
   // max rows of MAZE
   private int maxRowsAllowed;
   // Max Cols in the maze
-  private int maxColumsAllowed;
+  private int maxColumnsAllowed;
 
   private int distanceFromOrigin;
 
@@ -111,7 +112,7 @@ class Cell {
     //to make it clear
     this.isVisited = false;
     this.maxRowsAllowed = maxRows;
-    this.maxColumsAllowed = maxCols;
+    this.maxColumnsAllowed = maxCols;
     this.distanceFromOrigin = 0;
   }
 
@@ -128,5 +129,3 @@ class Cell {
     maze[this.row][this.column] = VISITED;
   }
 }
-
-

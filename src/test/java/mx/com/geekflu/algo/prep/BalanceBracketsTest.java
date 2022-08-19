@@ -12,7 +12,7 @@ public class BalanceBracketsTest {
   public void test_is_balanced_angle_brackets() {
     Assert.assertTrue(BalanceBrackets.isBalance("<<>><><><<<>>>"));
     Assert.assertFalse(BalanceBrackets.isBalance("<<>><><><<<>"));
-    Assert.assertTrue(BalanceBrackets.isBalance("<[{()}]><><><>()"));
+    Assert.assertTrue(BalanceBrackets.isBalance("(<[{()}]><><><>())"));
   }
 
   @Test
